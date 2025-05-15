@@ -1,4 +1,4 @@
-package org.example;
+package utils;
 
 public class Data {
 }
