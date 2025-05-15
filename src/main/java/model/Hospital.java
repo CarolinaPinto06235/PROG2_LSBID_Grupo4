@@ -27,10 +27,13 @@ public class Hospital {
         return false;
     }
     public boolean adicionarFreqCardiaca(Data dataRegisto, double frequencia, Paciente paciente, TecnicoDeSaude tecnicoSaude) {
-        //.....
-        return false;
+        if (paciente == null || tecnicoSaude == null)
+            return false;
+        FrequenciaCardiaca freq = new FrequenciaCardiaca(dataRegisto, frequencia, paciente, tecnicoSaude);
+            return lstFreqCard.add(freq);
     }
     // Alternativa
+
     public boolean adicionarFreqCardiaca1(Data dataRegisto, double frequencia, int idPaciente, int idTecnicoDeSaude) {
         //Paciente p = procurarPaciente(idPaciente);
         //TecnicoPaciente t = procurarTecnico(idTecnico);

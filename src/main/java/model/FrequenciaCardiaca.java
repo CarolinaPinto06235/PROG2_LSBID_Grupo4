@@ -28,13 +28,14 @@ public class FrequenciaCardiaca extends Medida {
             System.out.println("Frequência cardíaca fora dos limites válidos (40-160 bpm). Insira um valor dentro dos limites válidos.");
         }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("FrequenciaCardiaca{");
-        sb.append(super.toString());
-        sb.append("frequencia=").append(frequenciaCardiaca);
-        sb.append('}');
-        return sb.toString();
+        @Override
+        public String toString () {
+            final StringBuilder sb = new StringBuilder("FrequenciaCardiaca{");
+            sb.append(super.toString());
+            sb.append("frequencia=").append(frequenciaCardiaca);
+            sb.append('}');
+            return sb.toString();
+        }
     }
 }
 

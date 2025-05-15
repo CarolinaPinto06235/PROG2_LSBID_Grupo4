@@ -6,7 +6,8 @@ package ui;
  * and open the template in the editor.
  */
 
-import model.ViagensTop;
+//import model.ViagensTop;
+import model.Estatisticas;
 import utils.Utils;
 
 import model.Hospital;
@@ -35,9 +36,10 @@ public class MenuUI {
             System.out.println("----------------  |  6 - Ordenar técnicos de saúde por nome.                  |  -----------------");
             System.out.println("----------------- |  7 - Alteração dos sinais vitais.                         |  -----------------");
             System.out.println("----------------- |  8 - Percentagem de pacientes em situação crítica.        |  -----------------");
-            System.out.println("----------------- |  9 - Determinação do score de gravidade de um paciente.   |  -----------------");
-            System.out.println("----------------- | 10 - Guardar e visualizar dados do ficheiro.              |  -----------------");
-            System.out.println("----------------- | 11 - Visualização de gráficos de barras.                  |  -----------------");
+            System.out.println("----------------- |  9 - Estatísticas dos pacientes.                          |  -----------------");
+            System.out.println("----------------- | 10 - Determinação do score de gravidade de um paciente.   |  -----------------");
+            System.out.println("----------------- | 11 - Guardar e visualizar dados do ficheiro.              |  -----------------");
+            System.out.println("----------------- | 12 - Visualização de gráficos de barras.                  |  -----------------");
             System.out.println("----------------- |  0 - Terminar aplicação.                                  |  -----------------");
             System.out.println("--------------------------------------------------------------------------------------------------");
 
@@ -61,10 +63,13 @@ public class MenuUI {
             } else if (opcao.equals("8")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
             } else if (opcao.equals("9")) {
-                System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
+                Estatisticas.calcularEstatisticas;
+                System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
             } else if (opcao.equals("10")) {
-                System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
+                System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
             } else if (opcao.equals("11")) {
+                System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
+            } else if (opcao.equals("12")) {
                 System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
             }
             while (!opcao.equals("0")) ;

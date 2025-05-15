@@ -1,5 +1,5 @@
 package model;
-import javax.xml.crypto.Data;
+import utils.Data;
 
 public abstract class Medida {
     private Data dataRegisto;
@@ -23,7 +23,7 @@ public abstract class Medida {
         final StringBuilder sb = new StringBuilder("Medida{");
         sb.append("dataRegisto=").append(dataRegisto);
         sb.append(", paciente=").append(paciente);
-        sb.append(", tecnicoDeSaUDE=").append(tecnicoDeSaude);
+        sb.append(", tecnicoDeSaude=").append(tecnicoDeSaude);
         sb.append('}');
         return sb.toString();
     }
