@@ -16,11 +16,11 @@ public class SaturacaoOxigenio extends Medida {
             this.saturacaoOxigenio = MIN_SO2;
         }
 
-        public double getSaturacaoOxigenio () {
+        public double getSaturacaoOxigenio() {
             return saturacaoOxigenio;
         }
 
-        public void setSaturacaoOxigenio ( double saturacaoOxigenio){
+        public void setSaturacaoOxigenio (double saturacaoOxigenio){
             if (saturacaoOxigenio >= MIN_SO2 && saturacaoOxigenio <= MAX_SO2) {
                 this.saturacaoOxigenio = saturacaoOxigenio;
             } else {
