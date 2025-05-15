@@ -1,13 +1,19 @@
 package model;
 
-import javax.xml.crypto.Data;
+import utils.Data;
 
 public class Temperatura extends Medida {
     private double temperatura;
+    private static final double MIN_TEMP = 33.0;
+    private static final double MAX_TEMP = 40.0;
 
     public Temperatura(Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         super(dataRegisto, paciente, tecnicoDeSaude);
-        this.temperatura = temperatura;
+        if (temperatura >= MIN_TEMP && temperatura <= MAX_TEMP) {
+            this.temperatura = temperatura;
+        } else {
+            System.out.println("Temperatura fora dos limites válidos (33.0-40.0 ºC). Insira um valor dentro dos limites válidos.");
+            this.temperatura = MIN_TEMP;
     }
 
     public double getTemperatura() {
@@ -15,7 +21,11 @@ public class Temperatura extends Medida {
     }
 
     public void setTemperatura(double temperatura) {
-        this.temperatura = temperatura;
+            if (temperatura >= MIN_TEMP && temperatura <= MAX_TEMP) {
+                this.temperatura = temperatura;
+            } else {
+                System.out.println("Temperatura fora dos limites válidos (33.0-40.0 ºC). Insira um valor dentro dos limites válidos.");
+            }
     }
 
     @Override
