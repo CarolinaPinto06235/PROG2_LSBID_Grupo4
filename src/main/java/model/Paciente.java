@@ -1,30 +1,31 @@
 package model;
-
 import javax.xml.crypto.Data;
 
-public abstract class Medida {
-    private Data dataRegisto;
-    private Paciente paciente;
-    private TecnicoDeSaude tecnicoDeSaude;
+public class Paciente extends Pessoa  {
+    private Data dataInternamento;
 
-    public Medida(Data dataRegisto, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
-        this.dataRegisto = dataRegisto;
-        this.paciente = paciente;
-        this.tecnicoDeSaude = tecnicoDeSaude;
+    public Paciente(int id, String nome, char sexo, Data dataNascimento, Data dataInternamento) {
+        super(id, nome, sexo, dataNascimento);
+        this.dataInternamento = dataInternamento;
     }
-    public Data getDataRegisto() {
-        return dataRegisto;
+    public Paciente(Paciente p) {
+        super(p);
+        this.dataInternamento = p.dataInternamento;
     }
-    public void setDataRegisto(Data dataRegisto) {
-        this.dataRegisto = dataRegisto;
+
+    public Data getDataInternamento() {
+        return dataInternamento;
+    }
+
+    public void setDataInternamento(Data dataInternamento) {
+        this.dataInternamento = dataInternamento;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Medida{");
-        sb.append("dataRegisto=").append(dataRegisto);
-        sb.append(", paciente=").append(paciente);
-        sb.append(", tecnicoDeSaUDE=").append(tecnicoDeSaude);
+        final StringBuilder sb = new StringBuilder("Paciente{");
+        sb.append(super.toString());
+        sb.append("dataInternamento=").append(dataInternamento);
         sb.append('}');
         return sb.toString();
     }

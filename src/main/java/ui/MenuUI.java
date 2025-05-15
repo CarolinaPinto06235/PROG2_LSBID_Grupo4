@@ -6,14 +6,10 @@ package ui;
  * and open the template in the editor.
  */
 
-package org.example.ui;
+import model.ViagensTop;
+import utils.Utils;
 
-//import model.ViagensTop;
-//import utils.Utils;
-
-import org.example.model.Hospital;
-import org.example.utils.Utils;
-
+import model.Hospital;
 import java.io.IOException;
 
 public class MenuUI {
