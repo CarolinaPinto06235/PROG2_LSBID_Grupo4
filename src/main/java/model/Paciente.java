@@ -23,9 +23,10 @@ public class Paciente extends Pessoa  {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Paciente{");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Paciente{");
         sb.append(super.toString());
-        sb.append("dataInternamento=").append(dataInternamento);
+        sb.append(", dataInternamento=").append(dataInternamento);
         sb.append('}');
         return sb.toString();
     }

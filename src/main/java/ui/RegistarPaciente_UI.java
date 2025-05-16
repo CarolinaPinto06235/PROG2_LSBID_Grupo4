@@ -20,7 +20,7 @@ public class RegistarPaciente_UI {
         if (Utils.confirma("Confirma os dados? (S/N)")) {
             if (hospital.adicionarPaciente(novoPaciente)) {
                 System.out.println("Dados do paciente guardados com sucesso.");
-                adidionarMedicoes(novoPaciente);
+                adicionarMedicoes(novoPaciente);
             } else {
                 System.out.println("Não foi possível guardar os dados do paciente.");
             }
@@ -28,7 +28,7 @@ public class RegistarPaciente_UI {
     }
 
     private static Paciente introduzDados() {
-        int id = Utils.readIntFromConsole("Introduza o id do paciente: ");
+        int id = Utils.readIntFromConsole("Introduza o ID do paciente: ");
         String nome = Utils.readLineFromConsole("Introduza o nome do paciente: ");
 
         String s;

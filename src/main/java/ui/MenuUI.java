@@ -56,6 +56,7 @@ public class MenuUI {
                 Ficheiros.mostrarDadosDoFicheiro(hospital);
             } else if (opcao.equals("3")) {
                 System.out.println("Selecionou a opção: Visualização de dados no ecrã.");
+                Hospital.visualizarDados();
             } else if (opcao.equals("4")) {
                 System.out.println("Selecionou a opção: Escolher um técnico de saúde.");
             } else if (opcao.equals("5")) {
