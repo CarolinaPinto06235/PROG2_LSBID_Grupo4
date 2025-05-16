@@ -1,36 +1,143 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Estatisticas implements Calculo {
 
-    /**
-     * Calcula e exibe estatísticas básicas (média, desvio padrão, mínimo, máximo)
-     * para as medições de frequência cardíaca, temperatura e saturação de oxigênio.
-     *
-     * @param frequencias lista de valores de frequência cardíaca
-     * @param temperaturas lista de valores de temperatura
-     * @param saturacoes lista de valores de saturação de oxigênio
-     */
-    public void calcularEstatisticas(List<Double> frequencias, List<Double> temperaturas, List<Double> saturacoes) {
-        double[] freqArray = listToArray(frequencias);
-        double[] tempArray = listToArray(temperaturas);
-        double[] satArray = listToArray(saturacoes);
+    private Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Frequência Cardíaca - Média: " + calcularMedia(freqArray)
-                + ", Desvio Padrão: " + calcularDesvioPadrao(freqArray)
-                + ", Mínimo: " + calcularMinimo(freqArray)
-                + ", Máximo: " + calcularMaximo(freqArray));
+    public void mostrarMenu(Hospital hospital) {
+        System.out.println("\n------- Estatísticas -------");
+        System.out.println("1. Estatísticas de um grupo de pacientes. ");
+        System.out.println("2. Estatísticas de todos os pacientes. ");
+        System.out.print("Escolha uma opção: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-        System.out.println("Temperatura - Média: " + calcularMedia(tempArray)
-                + ", Desvio Padrão: " + calcularDesvioPadrao(tempArray)
-                + ", Mínimo: " + calcularMinimo(tempArray)
-                + ", Máximo: " + calcularMaximo(tempArray));
+        switch (opcao) {
+            case 1 -> calcularEstatisticas(hospital);
+            case 2 -> calcularEstatisticasGrupo(hospital);
+            default -> System.out.println("Opção inválida.");
+        }
+    }
 
-        System.out.println("Saturação de Oxigênio - Média: " + calcularMedia(satArray)
-                + ", Desvio Padrão: " + calcularDesvioPadrao(satArray)
-                + ", Mínimo: " + calcularMinimo(satArray)
-                + ", Máximo: " + calcularMaximo(satArray));
+    public void calcularEstatisticas(Hospital hospital) {
+        double[] freqArray = extrairFrequencias(hospital);
+        double[] tempArray = extrairTemperaturas(hospital);
+        double[] satArray = extrairSaturacoes(hospital);
+
+        mostrarEstatisticas(freqArray, tempArray, satArray);
+    }
+
+    public void calcularEstatisticasGrupo(Hospital hospital) {
+        System.out.print("Digite os IDs dos pacientes que deseja selecionar, separados por vírgula: ");
+        String linha = scanner.nextLine();
+        String[] idTexto = linha.split(",");
+
+        List<Double> freqList = new ArrayList<>();
+        List<Double> tempList = new ArrayList<>();
+        List<Double> satList = new ArrayList<>();
+        List<String> nomesGrupo = new ArrayList<>();
+
+        for (int i = 0; i < idTexto.length; i++) {
+            String texto = idTexto[i];
+            texto = texto.trim();
+
+            if (texto.length() > 0) {
+                int ID = Integer.parseInt(texto);
+
+                Paciente paciente = null;
+                for (Paciente p : hospital.getLstPacientes()) {
+                    if (p.getId() == ID) {
+                        paciente = p;
+                        nomesGrupo.add(p.getNome());
+                        break;
+                    }
+                }
+
+                if (paciente == null) {
+                    System.out.println("Paciente com ID " + ID + " não encontrado.");
+                    continue;
+                }
+
+                for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
+                    if (f.getIDpaciente() == ID) {
+                        freqList.add(f.getFrequenciaCardiaca());
+                    }
+                }
+
+
+                for (Temperatura t : hospital.getLstTemperatura()) {
+                    if (t.getIDpaciente() == ID) {
+                        tempList.add(t.getTemperatura());
+                    }
+                }
+
+                for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
+                    if (s.getIDpaciente() == ID) {
+                        satList.add(s.getSaturacaoOxigenio());
+                    }
+                }
+            }
+        }
+
+        double[] freqArray = listToArray(freqList);
+        double[] tempArray = listToArray(tempList);
+        double[] satArray = listToArray(satList);
+
+        mostrarEstatisticas(freqArray, tempArray, satArray);
+
+        System.out.println("\nPacientes incluídos no grupo: ");
+        for (String nome : nomesGrupo) {
+            System.out.println((" - " + nome));
+        }
+    }
+
+    private void mostrarEstatisticas(double[] freq, double[] temp, double[] sat) {
+
+        System.out.println("-------Estatísticas dos Sinais Vitais -------");
+
+        System.out.println("Frequência Cardíaca - Média: " + calcularMedia(freq)
+                + ", Desvio Padrão: " + calcularDesvioPadrao(freq)
+                + ", Mínimo: " + calcularMinimo(freq)
+                + ", Máximo: " + calcularMaximo(freq));
+
+        System.out.println("Temperatura - Média: " + calcularMedia(temp)
+                + ", Desvio Padrão: " + calcularDesvioPadrao(temp)
+                + ", Mínimo: " + calcularMinimo(temp)
+                + ", Máximo: " + calcularMaximo(temp));
+
+        System.out.println("Saturação de Oxigênio - Média: " + calcularMedia(sat)
+                + ", Desvio Padrão: " + calcularDesvioPadrao(sat)
+                + ", Mínimo: " + calcularMinimo(sat)
+                + ", Máximo: " + calcularMaximo(sat));
+    }
+
+
+    private double[] extrairFrequencias(Hospital hospital) {
+        List<Double> lista = new ArrayList<>();
+        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
+            lista.add(f.getFrequenciaCardiaca());
+        }
+        return listToArray(lista);
+    }
+
+    private double[] extrairTemperaturas(Hospital hospital) {
+        List<Double> lista = new ArrayList<>();
+        for (Temperatura t : hospital.getLstTemperatura()) {
+            lista.add(t.getTemperatura());
+        }
+        return listToArray(lista);
+    }
+
+    private double[] extrairSaturacoes(Hospital hospital) {
+        List<Double> lista = new ArrayList<>();
+        for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
+            lista.add(s.getSaturacaoOxigenio());
+        }
+        return listToArray(lista);
     }
 
     // Método auxiliar para converter List<Double> em double[]

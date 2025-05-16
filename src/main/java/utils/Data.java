@@ -77,10 +77,18 @@ public class Data {
     /**
      * Constrói uma instância de Data com a data por omissÃ£o.
      */
-    public Data(Data data) {
-        ano = data.ano;
-        mes = data.mes;
-        dia = data.dia;
+    public Data(String data) {
+        String[] partes = data.split("/");
+        if (partes.length != 3) {
+            System.out.println("Formato de data inválido. Use DD/MM/AAAA.");
+            this.dia = 1;
+            this.mes = 1;
+            this.ano = 1;
+            return;
+        }
+        this.dia = Integer.parseInt(partes[0]);
+        this.mes = Integer.parseInt(partes[1]);
+        this.ano = Integer.parseInt(partes[2]);
     }
     /**
      * Constrói uma instância de Data com a data por omissÃ£o.
