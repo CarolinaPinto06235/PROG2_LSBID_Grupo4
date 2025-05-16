@@ -65,13 +65,14 @@ public class MenuUI {
             } else if (opcao.equals("7")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
             } else if (opcao.equals("8")) {
+                System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.calcularEstatisticas(hospital);
-                System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
             } else if (opcao.equals("9")) {
                 System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
             } else if (opcao.equals("10")) {
                 System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
+
             } else if (opcao.equals("11")) {
                 System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
             }
