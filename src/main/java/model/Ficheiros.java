@@ -93,5 +93,22 @@ public class Ficheiros {
             }
             System.out.println("-------------------------------------");
         }
+    public static void alterarSinaisVitaisEGuardar(Hospital hospital) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite o nome do técnico de saúde que regista os dados: ");
+        String nomeTecnico = sc.nextLine();
+
+        TecnicoDeSaude tecnico = hospital.getLstTecnicos().stream()
+                .filter(t -> t.getNome().equalsIgnoreCase(nomeTecnico))
+                .findFirst()
+                .orElse(null);
+
+        if (tecnico == null) {
+            System.out.println("Técnico não encontrado.");
+            return;
+        }
+        hospital.alterarSinaisVitais(tecnico);
+        guardarSinaisVitais(hospital);
     }
 }
+
