@@ -212,5 +212,6 @@ public void alterarSinaisVitais(TecnicoDeSaude tecnico) {
         }
         default -> System.out.println("Opção inválida.");
     }
+
 }
 
