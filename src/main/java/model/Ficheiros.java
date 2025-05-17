@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Ficheiros {
     private static final String FICHEIRO_PACIENTES = "pacientes.txt";  // Arquivo para pacientes
     public static final String FICHEIRO_TECNICOS = "tecnicos.txt";// Arquivo para técnicos
+    public static final String FICHEIRO_SINAIS_VITAIS = "sinais_vitais.txt";
 
     public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -77,6 +78,36 @@ public class Ficheiros {
             }
             br.close();
         }
+
+    public static void carregarSinaisVitais(Hospital hospital) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_SINAIS_VITAIS));
+        String linha;
+        while ((linha = br.readLine()) != null) {
+            if (linha.trim().isEmpty()) continue;
+
+            String[] campos = linha.split(";");
+            if (campos.length < 5) continue;
+
+            int id = Integer.parseInt(campos[0].trim());
+            String nome = campos[1].trim();
+            double frequenciaCardiaca = Double.parseDouble(campos[2].trim());
+            double saturacaoOxigenio = Double.parseDouble(campos[3].trim());
+            double temperatura = Double.parseDouble(campos[4].trim());
+
+            boolean pacienteExiste = hospital.getLstPacientes().stream()
+                    .anyMatch(pac -> pac.getId() == id);
+
+            if (!pacienteExiste) {
+                System.out.println("Paciente com ID " + id + " não encontrado. Ignorando linha.");
+                continue;
+            }
+
+            hospital.getLstFreqCard().add(new FrequenciaCardiaca(id, frequenciaCardiaca));
+            hospital.getLstSaturacao().add(new SaturacaoOxigenio(id, saturacaoOxigenio));
+            hospital.getLstTemperatura().add(new Temperatura(id, temperatura));
+        }
+        br.close();
+    }
 
         private static void mostrarPacientes(List<Paciente> pacientes) {
             System.out.println("----- Lista de Pacientes -----");
