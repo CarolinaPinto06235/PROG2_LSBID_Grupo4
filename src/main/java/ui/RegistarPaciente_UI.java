@@ -1,5 +1,4 @@
 package ui;
-import model.Hospital;
 import model.Paciente;
 import utils.Data;
 import utils.Utils;

@@ -9,10 +9,8 @@ package ui;
 //import model.ViagensTop;
 import model.Estatisticas;
 import model.Ficheiros;
-import model.Paciente;
 import utils.Utils;
 
-import model.Hospital;
 import java.io.IOException;
 
 public class MenuUI {

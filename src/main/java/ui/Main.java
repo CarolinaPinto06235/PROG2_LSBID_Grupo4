@@ -6,8 +6,6 @@ package ui;
  * incluindo registo de dados, estatísticas e manipulação de ficheiros.
  */
 
-import model.Hospital;
-
 public class Main {
     public static void main(String[] args) {
         try {

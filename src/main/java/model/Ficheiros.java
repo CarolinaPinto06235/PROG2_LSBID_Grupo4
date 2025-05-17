@@ -1,9 +1,7 @@
 package model;
 
 import utils.Data;
-import model.Hospital;
-import model.Paciente;
-import model.TecnicoDeSaude;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
