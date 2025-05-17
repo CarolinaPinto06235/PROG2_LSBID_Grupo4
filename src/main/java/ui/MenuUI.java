@@ -59,8 +59,12 @@ public class MenuUI {
             } else if (opcao.equals("5")) {
                 System.out.println("Selecionou a opção: Ordenar técnicos de saúde por nome.");
             } else if (opcao.equals("6")) {
-                System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
-                hospital.alterarSinaisVitais();
+                    try {
+                        Ficheiros.alterarSinaisVitaisEGuardar(hospital);
+                    } catch (IOException e) {
+                        System.out.println("Erro ao guardar sinais vitais: " + e.getMessage());
+                    }
+                    break;
             } else if (opcao.equals("7")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
             } else if (opcao.equals("8")) {
