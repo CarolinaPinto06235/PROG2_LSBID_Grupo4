@@ -1,5 +1,9 @@
 package model;
 
+import model.Hospital;
+import model.Paciente;
+import utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -150,34 +154,62 @@ public class Estatisticas implements Calculo {
     }
 
 
-    public class calcularScoreGravidade {
+    public void calcularScoreGravidade(Hospital hospital) {
 
-     if (lstPacientes.isEmpty()) {
+        List<Paciente> lstPacientes = hospital.getLstPacientes();
+        List<Temperatura> lstTemperaturas = hospital.getLstTemperatura();
+        List<FrequenciaCardiaca> lstFrequencias = hospital.getLstFreqCard();
+        List<SaturacaoOxigenio> lstSaturacoes = hospital.getLstSaturacao();
+
+        if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes registados.");
             return;
         }
 
-    System.out.println("Lista de pacientes:");
-    for (int i = 0; i < lstPacientes.size(); i++) {
+        System.out.println("Lista de pacientes:");
+        for (int i = 0; i < lstPacientes.size(); i++) {
             System.out.println((i + 1) + ". " + lstPacientes.get(i).getNome());
         }
 
-        int opcao = Utils.readIntFromConsole("Escolha o número do paciente: ") - 1;
+        System.out.print("Digite o ID do paciente: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-    if (opcao < 0 || opcao >= lstPacientes.size()) {
+        if (opcao < 1 || opcao >= lstPacientes.size()) {
             System.out.println("Opção inválida.");
             return;
         }
 
-        Paciente p = lstPacientes.get(opcao);
+        Paciente p = lstPacientes.get(opcao-1);
+        int IDpaciente = p.getId();
 
-        // Obter as últimas medições
-        double temp = getUltimaMedicao(mapTemperatura, p);
-        double freq = getUltimaMedicao(mapFreqCardiaca, p);
-        double spo2 = getUltimaMedicao(mapSaturacaoOxigenio, p);
+        Double temp = null;
+        Double freq = null;
+        Double spo2 = null;
 
-    if (temp == -1 || freq == -1 || spo2 == -1) {
-            System.out.println("Faltam medições para este paciente.");
+        for (int i = lstTemperaturas.size() - 1; i >= 0; i--) {
+            if (lstTemperaturas.get(i).getID() == IDpaciente) {
+                temp = lstTemperaturas.get(i).getTemperatura();
+                break;
+            }
+        }
+
+        for (int i = lstFrequencias.size() - 1; i >= 0; i--) {
+            if (lstFrequencias.get(i).getID() == IDpaciente) {
+                freq = lstFrequencias.get(i).getFrequenciaCardiaca();
+                break;
+            }
+        }
+
+        for (int i = lstSaturacoes.size() - 1; i >= 0; i--) {
+            if (lstSaturacoes.get(i).getID() == IDpaciente) {
+                spo2 = lstSaturacoes.get(i).getSaturacaoOxigenio();
+                break;
+            }
+        }
+
+        if (temp == null || freq == null || spo2 == null) {
+            System.out.println("Não foram registadas medições para este paciente.");
             return;
         }
 
@@ -187,9 +219,9 @@ public class Estatisticas implements Calculo {
 
         double scoreFinal = (freqScore * 0.3) + (tempScore * 0.4) + (spo2Score * 0.3);
 
-    System.out.println("\nScore de Gravidade do paciente \"" + p.getNome() + "\": " + String.format("%.2f", scoreFinal));
+        System.out.println("\nScore de Gravidade do paciente \"" + p.getNome() + "\": " + String.format("%.2f", scoreFinal));
 
-    if (scoreFinal <= 2) {
+        if (scoreFinal <= 2) {
             System.out.println("Gravidade Baixa");
         } else if (scoreFinal <= 3.5) {
             System.out.println("Gravidade Moderada");

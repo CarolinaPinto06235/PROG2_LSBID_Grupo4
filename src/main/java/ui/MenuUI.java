@@ -68,6 +68,7 @@ public class MenuUI {
                 estatisticas.calcularEstatisticas(hospital);
             } else if (opcao.equals("9")) {
                 System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
+                Estatisticas.calcularScoreGravidade(hospital);
             } else if (opcao.equals("10")) {
                 System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
 
