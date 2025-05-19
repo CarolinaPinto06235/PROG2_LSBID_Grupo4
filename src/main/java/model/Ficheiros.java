@@ -166,8 +166,8 @@ public class Ficheiros {
     public static void guardarPacientes(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
-            String linha = p.getId() + ";" + p.getNome() + ";" + p.getSexo() + ";" +
-                    p.getDataNascimento().toString() + ";" + p.getDataInternamento().toString();
+            String linha = p.getId() + "," + p.getNome() + "," + p.getSexo() + "," +
+                    p.getDataNascimento().toString() + "," + p.getDataInternamento().toString();
             bw.write(linha);
             bw.newLine();
         }
@@ -177,7 +177,7 @@ public class Ficheiros {
     public static void guardarTecnicos(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_TECNICOS));
         for (TecnicoDeSaude t : hospital.getLstTecnicos()) {
-            String linha = t.getNome() + "," + t.getDataNascimento().toString() + "," +
+            String linha = t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento().toString() + "," +
                     t.getSexo() + "," + t.getCategoriaProfissional();
             bw.write(linha);
             bw.newLine();
@@ -188,37 +188,30 @@ public class Ficheiros {
     public static void guardarSinaisVitais(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_SINAIS_VITAIS));
         for (Paciente p : hospital.getLstPacientes()) {
-            int id = p.getId();
-            double fc = encontrarFrequenciaCardiaca(hospital, id);
-            double sat = encontrarSaturacao(hospital, id);
-            double temp = encontrarTemperatura(hospital, id);
+            for (Temperatura temp : hospital.getLstTemperatura()) {
+                bw.write("Paciente: " + temp.getPaciente().getId() + ", " + temp.getPaciente().getNome()
+                        + " | Valor Temperatura: " + temp.getTemperatura()
+                        + " | Data: " + temp.getDataRegisto()
+                        + " | Técnico de Saúde: " + temp.getTecnicoDeSaude().getId()
+                        + ", " + temp.getTecnicoDeSaude().getNome());
+            }
 
-            String linha = id + "; " + p.getNome() + "; " + fc + "; " + sat + "; " + temp;
-            bw.write(linha);
-            bw.newLine();
+            for (FrequenciaCardiaca fc : hospital.getLstFreqCard()) {
+                bw.write(("Paciente: " + fc.getPaciente().getId() + ", " + fc.getPaciente().getNome()
+                        + " | Valor Frequência: " + fc.getFrequenciaCardiaca()
+                        + " | Data: " + fc.getDataRegisto()
+                        + " | Técnico de Saúde: " + fc.getTecnicoDeSaude().getId()
+                        + ", " + fc.getTecnicoDeSaude().getNome()));
+            }
+
+            for (SaturacaoOxigenio sat : hospital.getLstSaturacao()) {
+                bw.write("Paciente: " + sat.getPaciente().getId() + ", " + sat.getPaciente().getNome()
+                        + " | Valor Saturação: " + sat.getSaturacaoOxigenio()
+                        + " | Data: " + sat.getDataRegisto()
+                        + " | Técnico de Saúde: " + sat.getTecnicoDeSaude().getId()
+                        + ", " + sat.getTecnicoDeSaude().getNome());
+            }
         }
         bw.close();
-    }
-    private static double encontrarFrequenciaCardiaca(Hospital hospital, int id) {
-        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
-            if (f.getIDpaciente() == id)
-                return f.getFrequenciaCardiaca();
-        }
-        return 0.0;
-    }
-    private static double encontrarSaturacao(Hospital hospital, int id) {
-        for (SaturacaoOxigenio satO2 : hospital.getLstSaturacao()) {
-            if (satO2.getIDpaciente() == id)
-                return satO2.getSaturacaoOxigenio();
-        }
-        return 0.0;
-    }
-
-    private static double encontrarTemperatura(Hospital hospital, int id) {
-        for (Temperatura temp : hospital.getLstTemperatura()) {
-            if (temp.getIDpaciente() == id)
-                return temp.getTemperatura();
-        }
-        return 0.0;
     }
 }
