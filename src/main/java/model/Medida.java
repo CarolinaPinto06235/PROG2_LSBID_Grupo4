@@ -18,6 +18,18 @@ public abstract class Medida {
         this.dataRegisto = dataRegisto;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public int getIDpaciente() {
+        return paciente.getId();
+    }
+
+    public TecnicoDeSaude getTecnicoDeSaude() {
+        return tecnicoDeSaude;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Medida{");

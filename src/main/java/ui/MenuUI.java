@@ -9,6 +9,8 @@ package ui;
 //import model.ViagensTop;
 import model.Estatisticas;
 import model.Ficheiros;
+import model.Hospital;
+import model.TecnicoDeSaude;
 import utils.Utils;
 
 import java.io.IOException;
@@ -53,29 +55,41 @@ public class MenuUI {
                 Ficheiros.mostrarDadosDoFicheiro(hospital);
             } else if (opcao.equals("3")) {
                 System.out.println("Selecionou a opção: Visualização de dados no ecrã.");
-                Hospital.visualizarDados();
+                hospital.visualizarDados();
             } else if (opcao.equals("4")) {
                 System.out.println("Selecionou a opção: Ordenar pacientes por data de nascimento.");
+                hospital.ordenarPacientesPorDataNascimento();
             } else if (opcao.equals("5")) {
                 System.out.println("Selecionou a opção: Ordenar técnicos de saúde por nome.");
+                hospital.ordenarTecnicosPorNome();
             } else if (opcao.equals("6")) {
                 System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
+                hospital.alterarSinaisVitais();
             } else if (opcao.equals("7")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
+                Estatisticas.isCritico();
             } else if (opcao.equals("8")) {
                 System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
                 Estatisticas estatisticas = new Estatisticas();
-                estatisticas.calcularEstatisticas(hospital);
+                estatisticas.mostrarMenu(hospital);
             } else if (opcao.equals("9")) {
                 System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
                 Estatisticas.calcularScoreGravidade(hospital);
             } else if (opcao.equals("10")) {
                 System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
+                Ficheiros.guardarPacientes(hospital);
+                Ficheiros.guardarTecnicos(hospital);
+                Ficheiros.guardarSinaisVitais(hospital);
+                System.out.println("Dados guardados com sucesso.");
 
+                Ficheiros.mostrarDadosDoFicheiro(hospital);
+                Ficheiros.carregarSinaisVitais(hospital);
+                Ficheiros.mostrarSinaisVitais(hospital);
             } else if (opcao.equals("11")) {
                 System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
             }
-            while (!opcao.equals("0")) ;
+
         }
+        while (!opcao.equals("0")) ;
     }
 }

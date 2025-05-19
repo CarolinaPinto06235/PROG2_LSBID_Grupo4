@@ -3,8 +3,10 @@ package model;
 import utils.Data;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Hospital {
 
@@ -65,7 +67,7 @@ public class Hospital {
     }
 
 
-    public boolean adicionarSaturacaoOxigenio (Data dataRegisto, double saturacaoOxigenio, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
+    public boolean adicionarSaturacaoOxigenio(Data dataRegisto, double saturacaoOxigenio, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
         SaturacaoOxigenio saturacaoOxigenio1 = new SaturacaoOxigenio(dataRegisto, saturacaoOxigenio, paciente, tecnicoDeSaude);
@@ -73,23 +75,24 @@ public class Hospital {
     }
 
 
-    public boolean adicionarTemperatura (Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
+    public boolean adicionarTemperatura(Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
         Temperatura temperatura1 = new Temperatura(dataRegisto, temperatura, paciente, tecnicoDeSaude);
         return lstTemperatura.add(temperatura1);
     }
 
-    public void visualizarDados(){
+    public void visualizarDados() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
-            System.out.println("\n------------ Visualizar dados: ------------");
-            System.out.println("-------| 1. Pacientes                |-------");
-            System.out.println("-------| 2. Técnicos de Saúde        |-------");
-            System.out.println("-------| 3. Todos                    |-------");
-            System.out.println("-------| 0. Voltar ao menu principal |-------");
+            System.out.println("\n-------------- Visualizar dados: --------------");
+            System.out.println("-------| 1. Pacientes                    |-------");
+            System.out.println("-------| 2. Técnicos de Saúde            |-------");
+            System.out.println("-------| 3. Sinais Vitais dos pacientes  |-------");
+            System.out.println("-------| 4. Todos                        |-------");
+            System.out.println("-------| 0. Voltar ao menu principal     |-------");
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
@@ -103,8 +106,12 @@ public class Hospital {
                     mostrarTecnicosSaude();
                     break;
                 case 3:
+                    mostrarSinaisVitais();
+                    break;
+                case 4:
                     mostrarPacientes();
                     mostrarTecnicosSaude();
+                    mostrarSinaisVitais();
                     break;
                 case 0:
                     System.out.println("A regressar ao menu principal.");
@@ -138,6 +145,113 @@ public class Hospital {
         }
     }
 
+    public void mostrarSinaisVitais() {
+        if (lstFreqCard.isEmpty() && lstTemperatura.isEmpty() && lstSaturacao.isEmpty()) {
+            System.out.println("Não há medições de sinais vitais para exibir.");
+            return;
+        }
+
+        System.out.println("------- Lista de Frequências Cardíacas -------");
+        if (lstFreqCard.isEmpty()) {
+            System.out.println("Nenhuma medição de frequência cardíaca registada.");
+        } else {
+            for (FrequenciaCardiaca fc : lstFreqCard) {
+                System.out.println(fc);
+            }
+        }
+
+        System.out.println("\n------- Lista de Temperaturas -------");
+        if (lstTemperatura.isEmpty()) {
+            System.out.println("Nenhuma medição de temperatura registada.");
+        } else {
+            for (Temperatura temp : lstTemperatura) {
+                System.out.println(temp);
+            }
+        }
+
+        System.out.println("\n------- Lista de Saturações de Oxigénio -------");
+        if (lstSaturacao.isEmpty()) {
+            System.out.println("Nenhuma medição de saturação registada.");
+        } else {
+            for (SaturacaoOxigenio sat : lstSaturacao) {
+                System.out.println(sat);
+            }
+        }
+    }
+
+    public void alterarSinaisVitais(TecnicoDeSaude tecnico) {
+        if (tecnico == null) {
+            System.out.println("Técnico inválido.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o ID do paciente: ");
+        int IDPaciente = scanner.nextInt();
+        scanner.nextLine();
+
+        Paciente paciente = null;
+        for (Paciente p : lstPacientes) {
+            if (p.getId() == IDPaciente) {
+                paciente = p;
+                break;
+            }
+        }
+
+        if (paciente == null) {
+            System.out.println("Paciente não encontrado.");
+            return;
+        }
+
+        System.out.println("\nQual sinal vital deseja alterar?");
+        System.out.println("1. Temperatura");
+        System.out.println("2. Frequência Cardíaca");
+        System.out.println("3. Saturação de Oxigênio");
+        System.out.print("Escolha: ");
+        int escolha = scanner.nextInt();
+        scanner.nextLine();
+
+        Data dataAtual = new Data(); // data atual
+
+        switch (escolha) {
+            case 1 -> {
+                System.out.print("Digite a nova temperatura: ");
+                double temperatura = scanner.nextDouble();
+                boolean sucesso = adicionarTemperatura(dataAtual, temperatura, paciente, tecnico);
+                System.out.println(sucesso ? "Temperatura registada com sucesso." : "Erro ao registar temperatura.");
+            }
+            case 2 -> {
+                System.out.print("Digite a nova frequência cardíaca: ");
+                double frequencia = scanner.nextDouble();
+                boolean sucesso = adicionarFreqCardiaca(dataAtual, frequencia, paciente, tecnico);
+                System.out.println(sucesso ? "Frequência registada com sucesso." : "Erro ao registar frequência.");
+            }
+            case 3 -> {
+                System.out.print("Digite a nova saturação de oxigénio: ");
+                double saturacao = scanner.nextDouble();
+                boolean sucesso = adicionarSaturacaoOxigenio(dataAtual, saturacao, paciente, tecnico);
+                System.out.println(sucesso ? "Saturação registada com sucesso." : "Erro ao registar saturação.");
+            }
+            default -> System.out.println("Opção inválida.");
+        }
+
+    }
+
+    public List<Paciente> ordenarPacientesPorDataNascimento(List<Paciente> pacientes) {
+        return pacientes.stream()
+                .sorted(Comparator.comparing(p -> p.getDataNascimento().toLocalDate()))
+                .collect(Collectors.toList());
+    }
+
+    public List<TecnicoDeSaude> ordenarTecnicosPorNome(List<TecnicoDeSaude> tecnicos) {
+        return tecnicos.stream()
+                .sorted(Comparator.comparing(TecnicoDeSaude::getNome))
+                .collect(Collectors.toList());
+    }
+
+
+}
 /* Alternativa
 
     public boolean adicionarFreqCardiaca1(Data dataRegisto, double frequencia, int idPaciente, int idTecnicoDeSaude) {
@@ -155,7 +269,7 @@ public class Hospital {
         }
         return false;
     }*/
-}
+
 
 // Completar com outras funcionalidades
 

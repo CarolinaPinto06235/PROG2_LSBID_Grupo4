@@ -12,6 +12,7 @@ public class Estatisticas implements Calculo {
 
     private Scanner scanner = new Scanner(System.in);
 
+
     public void mostrarMenu(Hospital hospital) {
         System.out.println("\n------- Estatísticas -------");
         System.out.println("1. Estatísticas de um grupo de pacientes. ");
@@ -20,7 +21,7 @@ public class Estatisticas implements Calculo {
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
-        switch (opcao) {
+        switch (opcao){
             case 1 -> calcularEstatisticas(hospital);
             case 2 -> calcularEstatisticasGrupo(hospital);
             default -> System.out.println("Opção inválida.");
@@ -188,21 +189,21 @@ public class Estatisticas implements Calculo {
         Double spo2 = null;
 
         for (int i = lstTemperaturas.size() - 1; i >= 0; i--) {
-            if (lstTemperaturas.get(i).getID() == IDpaciente) {
+            if (lstTemperaturas.get(i).getIDpaciente() == IDpaciente) {
                 temp = lstTemperaturas.get(i).getTemperatura();
                 break;
             }
         }
 
         for (int i = lstFrequencias.size() - 1; i >= 0; i--) {
-            if (lstFrequencias.get(i).getID() == IDpaciente) {
+            if (lstFrequencias.get(i).getIDpaciente() == IDpaciente) {
                 freq = lstFrequencias.get(i).getFrequenciaCardiaca();
                 break;
             }
         }
 
         for (int i = lstSaturacoes.size() - 1; i >= 0; i--) {
-            if (lstSaturacoes.get(i).getID() == IDpaciente) {
+            if (lstSaturacoes.get(i).getIDpaciente() == IDpaciente) {
                 spo2 = lstSaturacoes.get(i).getSaturacaoOxigenio();
                 break;
             }
@@ -232,11 +233,11 @@ public class Estatisticas implements Calculo {
 
 // Métodos auxiliares:
 
-    private double getUltimaMedicao(Map<Paciente, List<? extends Medicao>> mapa, Paciente p) {
+/*    private double getUltimaMedicao(Map<Paciente, List<? extends Medicao>> mapa, Paciente p) {
         List<? extends Medicao> medicoes = mapa.get(p);
         if (medicoes == null || medicoes.isEmpty()) return -1;
         return medicoes.get(medicoes.size() - 1).getValor();
-    }
+    } */
 
     private int pontuarTemperatura(double t) {
         if (t < 35.0 || t > 40.0) return 5;
@@ -259,6 +260,25 @@ public class Estatisticas implements Calculo {
         if (s <= 92) return 3;
         if (s <= 94) return 2;
         return 1;
+    }
+
+    public boolean isCritico(Paciente p, Hospital hospital) {
+        double temp = hospital.getLstTemperatura().stream()
+                .filter(t -> t.getIDpaciente() == p.getId())
+                .mapToDouble(Temperatura::getTemperatura)
+                .max().orElse(0);
+
+        double freq = hospital.getLstFreqCard().stream()
+                .filter(f -> f.getIDpaciente() == p.getId())
+                .mapToDouble(FrequenciaCardiaca::getFrequenciaCardiaca)
+                .max().orElse(0);
+
+        double sat = hospital.getLstSaturacao().stream()
+                .filter(s -> s.getIDpaciente() == p.getId())
+                .mapToDouble(SaturacaoOxigenio::getSaturacaoOxigenio)
+                .max().orElse(100);
+
+        return (temp < 35 || temp > 38) || (freq < 50 || freq > 120) || (sat < 90);
     }
 
 }
