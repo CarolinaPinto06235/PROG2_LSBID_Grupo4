@@ -1,6 +1,6 @@
 package model;
 
-import javax.xml.crypto.Data;
+import utils.Data;
 
 public abstract class Pessoa {
     protected int id;

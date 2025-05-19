@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheiros {
-    private static final String FICHEIRO_PACIENTES = "pacientes.txt";  // Arquivo para pacientes
-    public static final String FICHEIRO_TECNICOS = "tecnicos.txt";// Arquivo para técnicos
+    private static final String FICHEIRO_PACIENTES = "pacientes.txt";
+    public static final String FICHEIRO_TECNICOS = "tecnicos.txt";
     public static final String FICHEIRO_SINAIS_VITAIS = "sinais_vitais.txt";
 
     public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
@@ -201,14 +201,14 @@ public class Ficheiros {
     }
     private static double encontrarFrequenciaCardiaca(Hospital hospital, int id) {
         for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
-            if (f.getId() == id)
+            if (f.getIDpaciente() == id)
                 return f.getFrequenciaCardiaca();
         }
         return 0.0;
     }
     private static double encontrarSaturacao(Hospital hospital, int id) {
         for (SaturacaoOxigenio satO2 : hospital.getLstSaturacao()) {
-            if (satO2.getId() == id)
+            if (satO2.getIDpaciente() == id)
                 return satO2.getSaturacaoOxigenio();
         }
         return 0.0;
@@ -216,7 +216,7 @@ public class Ficheiros {
 
     private static double encontrarTemperatura(Hospital hospital, int id) {
         for (Temperatura temp : hospital.getLstTemperatura()) {
-            if (temp.getId() == id)
+            if (temp.getIDpaciente() == id)
                 return temp.getTemperatura();
         }
         return 0.0;

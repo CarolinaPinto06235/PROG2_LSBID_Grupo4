@@ -212,7 +212,7 @@ public class Hospital {
         int escolha = scanner.nextInt();
         scanner.nextLine();
 
-        Data dataAtual = new Data(); // data atual
+        Data dataAtual = new Data();
 
         switch (escolha) {
             case 1 -> {
@@ -239,9 +239,23 @@ public class Hospital {
     }
 
     public List<Paciente> ordenarPacientesPorDataNascimento(List<Paciente> pacientes) {
-        return pacientes.stream()
-                .sorted(Comparator.comparing(p -> p.getDataNascimento().toLocalDate()))
-                .collect(Collectors.toList());
+        for (int i = 0; i < pacientes.size() - 1; i++) {
+            for (int j = i + 1; j < pacientes.size(); j++) {
+                Data d1 = pacientes.get(i).getDataNascimento();
+                Data d2 = pacientes.get(j).getDataNascimento();
+
+                if (d1.getAno() > d2.getAno() ||
+                        (d1.getAno() == d2.getAno() && d1.getMes() > d2.getMes()) ||
+                        (d1.getAno() == d2.getAno() && d1.getMes() == d2.getMes() && d1.getDia() > d2.getDia())) {
+
+                    Paciente temp = pacientes.get(i);
+                    pacientes.set(i, pacientes.get(j));
+                    pacientes.set(j, temp);
+                }
+            }
+        }
+
+        return pacientes;
     }
 
     public List<TecnicoDeSaude> ordenarTecnicosPorNome(List<TecnicoDeSaude> tecnicos) {

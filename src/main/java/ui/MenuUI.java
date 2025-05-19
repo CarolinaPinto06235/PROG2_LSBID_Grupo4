@@ -81,12 +81,12 @@ public class MenuUI {
                 Ficheiros.guardarTecnicos(hospital);
                 Ficheiros.guardarSinaisVitais(hospital);
                 System.out.println("Dados guardados com sucesso.");
-
                 Ficheiros.mostrarDadosDoFicheiro(hospital);
                 Ficheiros.carregarSinaisVitais(hospital);
                 Ficheiros.mostrarSinaisVitais(hospital);
             } else if (opcao.equals("11")) {
                 System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
+                Estatisticas.mostrarGraficoBarras();
             }
 
         }

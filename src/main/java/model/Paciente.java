@@ -1,5 +1,5 @@
 package model;
-import javax.xml.crypto.Data;
+import utils.Data;
 
 public class Paciente extends Pessoa  {
     private Data dataInternamento;
@@ -8,9 +8,14 @@ public class Paciente extends Pessoa  {
         super(id, nome, sexo, dataNascimento);
         this.dataInternamento = dataInternamento;
     }
+
     public Paciente(Paciente p) {
         super(p);
         this.dataInternamento = p.dataInternamento;
+    }
+
+    public Data getDataNascimento() {
+        return super.getDataNascimento();
     }
 
     public Data getDataInternamento() {
