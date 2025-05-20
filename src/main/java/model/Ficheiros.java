@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheiros {
-    private static final String FICHEIRO_PACIENTES = "pacientes.txt";
-    public static final String FICHEIRO_TECNICOS = "tecnicos.txt";
-    public static final String FICHEIRO_SINAIS_VITAIS = "sinais_vitais.txt";
+    private static final String FICHEIRO_PACIENTES = "Pacientes.txt";
+    public static final String FICHEIRO_TECNICOS = "TecnicosDeSaude.txt";
+    public static final String FICHEIRO_SINAIS_VITAIS = "Sinais_Vitais.txt";
 
     public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -32,28 +32,34 @@ public class Ficheiros {
     }
 
     public static void carregarPacientes(Hospital hospital) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_PACIENTES));
-        String linha;
-        while ((linha = br.readLine()) != null) {
-            if (linha.trim().isEmpty()) continue;
-            String[] campos = linha.split(";");
-            if (campos.length < 5) continue;
+        InputStream is = Ficheiros.class.getClassLoader().getResourceAsStream(FICHEIRO_PACIENTES);
+        if (is == null) {
+            System.out.println("Arquivo " + FICHEIRO_PACIENTES + " não encontrado no classpath.");
+            return;
+        }
 
-            int id = Integer.parseInt(campos[0].trim());
-            String nome = campos[1].trim();
-            char sexo = campos[2].trim().charAt(0);
-            Data dataNascimento = new Data(campos[3].trim());
-            Data dataInternamento = new Data(campos[4].trim());
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                if (linha.trim().isEmpty()) continue;
+                String[] campos = linha.split(";");
+                if (campos.length < 5) continue;
 
-            Paciente p = new Paciente(id, nome, sexo, dataNascimento, dataInternamento);
+                int id = Integer.parseInt(campos[0].trim());
+                String nome = campos[1].trim();
+                char sexo = campos[2].trim().charAt(0);
+                Data dataNascimento = new Data(campos[3].trim());
+                Data dataInternamento = new Data(campos[4].trim());
 
-            boolean existe = hospital.getLstPacientes().stream()
-                    .anyMatch(pac -> pac.getId() == id);
-            if (!existe) {
-                hospital.adicionarPaciente(p);
+                Paciente p = new Paciente(id, nome, sexo, dataNascimento, dataInternamento);
+
+                boolean existe = hospital.getLstPacientes().stream()
+                        .anyMatch(pac -> pac.getId() == id);
+                if (!existe) {
+                    hospital.adicionarPaciente(p);
+                }
             }
         }
-        br.close();
     }
 
     public static void carregarTecnicos(Hospital hospital) throws IOException {
