@@ -152,7 +152,7 @@ public class Ficheiros {
             System.out.println(f);
         }
 
-        System.out.println("----- Saturações de Oxigénio -----");
+        System.out.println("----- Saturações de Oxigénio -------");
         for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
             System.out.println(s);
         }
