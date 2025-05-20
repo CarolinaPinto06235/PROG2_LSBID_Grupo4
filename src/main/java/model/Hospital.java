@@ -5,6 +5,7 @@ import utils.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class Hospital {
 
@@ -137,6 +138,30 @@ public class Hospital {
             }
         }
     }
+
+    public void ordenarPacientesPorDataNascimento() {
+        if (lstPacientes.isEmpty()) {
+            System.out.println("Não há pacientes para ordenar.");
+            return;
+        }
+
+        lstPacientes.sort(Comparator.comparing(Paciente::getDataNascimento));
+        System.out.println("Pacientes ordenados por data de nascimento:");
+        mostrarPacientes();
+    }
+
+    public void ordenarTecnicosPorNome() {
+        if (lstTecnicos.isEmpty()) {
+            System.out.println("Não há técnicos para ordenar.");
+            return;
+        }
+
+        lstTecnicos.sort(Comparator.comparing(TecnicoDeSaude::getNome, String.CASE_INSENSITIVE_ORDER));
+        System.out.println("Técnicos de saúde ordenados por nome:");
+        mostrarTecnicosSaude();
+    }
+
+
 
 /* Alternativa
 

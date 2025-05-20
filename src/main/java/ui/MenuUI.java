@@ -1,4 +1,5 @@
 package ui;
+import model.Ficheiros;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,17 +65,19 @@ public class MenuUI {
                 hospital.ordenarTecnicosPorNome();
             } else if (opcao.equals("6")) {
                 System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
-                hospital.alterarSinaisVitais();
+                Ficheiros.alterarSinaisVitaisEGuardar(hospital);
             } else if (opcao.equals("7")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
-                Estatisticas.isCritico();
+                Estatisticas estatisticas = new Estatisticas();
+                estatisticas.mostrarPercentagemCriticos(hospital);
             } else if (opcao.equals("8")) {
                 System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.mostrarMenu(hospital);
             } else if (opcao.equals("9")) {
                 System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
-                Estatisticas.calcularScoreGravidade(hospital);
+                Estatisticas estatisticas = new Estatisticas();
+                estatisticas.calcularScoreGravidade(hospital);
             } else if (opcao.equals("10")) {
                 System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
                 Ficheiros.guardarPacientes(hospital);

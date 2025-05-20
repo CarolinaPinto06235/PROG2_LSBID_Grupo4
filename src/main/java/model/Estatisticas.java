@@ -356,5 +356,24 @@ public class Estatisticas implements Calculo {
         }
         System.out.println(" (" + valor + ")");
     }
+    public void mostrarPercentagemCriticos(Hospital hospital) {
+        List<Paciente> pacientes = hospital.getLstPacientes();
+
+        if (pacientes.isEmpty()) {
+            System.out.println("Não há pacientes registados.");
+            return;
+        }
+
+        int criticos = 0;
+        for (Paciente p : pacientes) {
+            if (isCritico(p, hospital)) {
+                criticos++;
+            }
+        }
+
+        double percentagem = (criticos * 100.0) / pacientes.size();
+        System.out.printf("Percentagem de pacientes críticos: %.2f%% (%d de %d)%n",
+                percentagem, criticos, pacientes.size());
+    }
 }
 
