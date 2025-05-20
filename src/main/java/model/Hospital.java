@@ -156,62 +156,7 @@ public class Hospital {
         return false;
     }*/
 }
-public void alterarSinaisVitais(TecnicoDeSaude tecnico) {
-    if (tecnico == null) {
-        System.out.println("Técnico inválido.");
-        return;
-    }
 
-    Scanner scanner = new Scanner(System.in);
+// Completar com outras funcionalidades
 
-    System.out.print("Digite o ID do paciente: ");
-    int idPaciente = scanner.nextInt();
-    scanner.nextLine();
-
-    Paciente paciente = null;
-    for (Paciente p : lstPacientes) {
-        if (p.getId() == idPaciente) {
-            paciente = p;
-            break;
-        }
-    }
-
-    if (paciente == null) {
-        System.out.println("Paciente não encontrado.");
-        return;
-    }
-
-    System.out.println("\nQual sinal vital deseja alterar?");
-    System.out.println("1. Temperatura");
-    System.out.println("2. Frequência Cardíaca");
-    System.out.println("3. Saturação de Oxigênio");
-    System.out.print("Escolha: ");
-    int escolha = scanner.nextInt();
-    scanner.nextLine();
-
-    Data dataAtual = new Data(); // data atual
-
-    switch (escolha) {
-        case 1 -> {
-            System.out.print("Digite a nova temperatura: ");
-            double temperatura = scanner.nextDouble();
-            boolean sucesso = adicionarTemperatura(dataAtual, temperatura, paciente, tecnico);
-            System.out.println(sucesso ? "Temperatura registada com sucesso." : "Erro ao registar temperatura.");
-        }
-        case 2 -> {
-            System.out.print("Digite a nova frequência cardíaca: ");
-            double frequencia = scanner.nextDouble();
-            boolean sucesso = adicionarFreqCardiaca(dataAtual, frequencia, paciente, tecnico);
-            System.out.println(sucesso ? "Frequência registada com sucesso." : "Erro ao registar frequência.");
-        }
-        case 3 -> {
-            System.out.print("Digite a nova saturação de oxigênio: ");
-            double saturacao = scanner.nextDouble();
-            boolean sucesso = adicionarSaturacaoOxigenio(dataAtual, saturacao, paciente, tecnico);
-            System.out.println(sucesso ? "Saturação registada com sucesso." : "Erro ao registar saturação.");
-        }
-        default -> System.out.println("Opção inválida.");
-    }
-
-}
 

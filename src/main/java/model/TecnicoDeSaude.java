@@ -14,7 +14,7 @@ public class TecnicoDeSaude extends Pessoa{
         this.categoriaProfissional = ts.categoriaProfissional;
     }
 
-    public String categoriaProfissional() {
+    public String getCategoriaProfissional() {
         return categoriaProfissional;
     }
 
