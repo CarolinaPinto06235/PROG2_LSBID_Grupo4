@@ -114,7 +114,7 @@ public class Estatisticas implements Calculo {
                 + ", Mínimo: " + calcularMinimo(temp)
                 + ", Máximo: " + calcularMaximo(temp));
 
-        System.out.println("Saturação de Oxigênio - Média: " + calcularMedia(sat)
+        System.out.println("Saturação de Oxigénio - Média: " + calcularMedia(sat)
                 + ", Desvio Padrão: " + calcularDesvioPadrao(sat)
                 + ", Mínimo: " + calcularMinimo(sat)
                 + ", Máximo: " + calcularMaximo(sat));
@@ -145,7 +145,6 @@ public class Estatisticas implements Calculo {
         return listToArray(lista);
     }
 
-    // Método auxiliar para converter List<Double> em double[]
     private double[] listToArray(List<Double> lista) {
         double[] array = new double[lista.size()];
         for (int i = 0; i < lista.size(); i++) {

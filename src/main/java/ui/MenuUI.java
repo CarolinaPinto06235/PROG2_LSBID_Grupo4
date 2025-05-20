@@ -70,7 +70,7 @@ public class MenuUI {
                 }
             } else if (opcao.equals("6")) {
                 if (tecnico == null) {
-                    System.out.println("Você precisa selecionar um técnico primeiro (opção 5).");
+                    System.out.println("Selecione um técnico primeiro (opção 5).");
                 }
                 System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
                 Ficheiros.alterarSinaisVitais(hospital, tecnico);

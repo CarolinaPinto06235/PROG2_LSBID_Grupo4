@@ -131,7 +131,6 @@ public class Ficheiros {
         br.close();
     }
     public static void alterarSinaisVitais(Hospital hospital, TecnicoDeSaude tecnico) {
-        // Exemplo simples para simular alteração dos sinais vitais:
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Digite o ID do paciente para alterar sinais vitais: ");
@@ -148,15 +147,15 @@ public class Ficheiros {
             return;
         }
 
-        System.out.print("Nova frequência cardíaca: ");
+        System.out.print("Nova Frequência Cardíaca: ");
         double novaFreq = sc.nextDouble();
-        System.out.print("Nova saturação de oxigênio: ");
+        System.out.print("Nova Saturação de Oxigénio: ");
         double novaSaturacao = sc.nextDouble();
-        System.out.print("Nova temperatura: ");
+        System.out.print("Nova Temperatura: ");
         double novaTemp = sc.nextDouble();
         sc.nextLine();
 
-        Data hoje = new Data(); // supondo que o construtor Data() pega a data atual
+        Data hoje = new Data();
 
         hospital.getLstFreqCard().add(new FrequenciaCardiaca(hoje, novaFreq, paciente, tecnico));
         hospital.getLstSaturacao().add(new SaturacaoOxigenio(hoje, novaSaturacao, paciente, tecnico));
@@ -203,8 +202,8 @@ public class Ficheiros {
     public static void guardarPacientes(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
-            String linha = p.getId() + ";" + p.getNome() + ";" + p.getSexo() + ";" +
-                    p.getDataNascimento().toString() + ";" + p.getDataInternamento().toString();
+            String linha =  " Paciente: " + p.getId() + ", " + p.getNome() + ", " + p.getSexo() + ", " +
+                    p.getDataNascimento().toString() + ", " + p.getDataInternamento().toString();
             bw.write(linha);
             bw.newLine();
         }
@@ -214,8 +213,8 @@ public class Ficheiros {
     public static void guardarTecnicos(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_TECNICOS));
         for (TecnicoDeSaude t : hospital.getLstTecnicos()) {
-            String linha = t.getNome() + "," + t.getDataNascimento().toString() + "," +
-                    t.getSexo() + "," + t.getCategoriaProfissional();
+            String linha = "Técnico de Saúde: " + t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento().toString() + ", " +
+                    t.getSexo() + ", " + t.getCategoriaProfissional();
             bw.write(linha);
             bw.newLine();
         }
@@ -225,23 +224,29 @@ public class Ficheiros {
     public static void guardarSinaisVitais(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_SINAIS_VITAIS));
         for (Temperatura temp : hospital.getLstTemperatura()) {
-            bw.write(temp.getPaciente().getId() + ";" + temp.getPaciente().getNome() + ";" +
-                    temp.getTemperatura() + ";" + temp.getDataRegisto() + ";" +
-                    temp.getTecnicoDeSaude().getNome());
+            bw.write("Paciente: " + temp.getPaciente().getId() + ", " + temp.getPaciente().getNome()
+                    + " | Valor Temperatura: " + temp.getTemperatura()
+                    + " | Data: " + temp.getDataRegisto()
+                    + " | Técnico de Saúde: " + temp.getTecnicoDeSaude().getId()
+                    + ", " + temp.getTecnicoDeSaude().getNome());
             bw.newLine();
         }
 
         for (FrequenciaCardiaca fc : hospital.getLstFreqCard()) {
-            bw.write(fc.getPaciente().getId() + ";" + fc.getPaciente().getNome() + ";" +
-                    fc.getFrequenciaCardiaca() + ";" + fc.getDataRegisto() + ";" +
-                    fc.getTecnicoDeSaude().getNome());
+            bw.write("Paciente: " + fc.getPaciente().getId() + ", " + fc.getPaciente().getNome()
+                    + " | Valor Frequência: " + fc.getFrequenciaCardiaca()
+                    + " | Data: " + fc.getDataRegisto()
+                    + " | Técnico de Saúde: " + fc.getTecnicoDeSaude().getId()
+                    + ", " + fc.getTecnicoDeSaude().getNome());
             bw.newLine();
         }
 
         for (SaturacaoOxigenio sat : hospital.getLstSaturacao()) {
-            bw.write(sat.getPaciente().getId() + ";" + sat.getPaciente().getNome() + ";" +
-                    sat.getSaturacaoOxigenio() + ";" + sat.getDataRegisto() + ";" +
-                    sat.getTecnicoDeSaude().getNome());
+            bw.write("Paciente: " + sat.getPaciente().getId() + ", " + sat.getPaciente().getNome()
+                    + " | Valor Saturação: " + sat.getSaturacaoOxigenio()
+                    + " | Data: " + sat.getDataRegisto()
+                    + " | Técnico de Saúde: " + sat.getTecnicoDeSaude().getId()
+                    + ", " + sat.getTecnicoDeSaude().getNome());
             bw.newLine();
         }
         bw.close();
