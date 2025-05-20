@@ -15,17 +15,18 @@ import model.TecnicoDeSaude;
 import utils.Utils;
 
 import java.io.IOException;
-
+import java.util.Scanner;
 public class MenuUI {
     private Hospital hospital;
     private String opcao;
-
+    Scanner sc = new Scanner(System.in);
 
     public MenuUI(Hospital hospital) {
         this.hospital = hospital;
     }
 
     public void run() throws IOException {
+        TecnicoDeSaude tecnico = null;
         do {
 
             System.out.println("\n-------------------------  MONOTORIZAÇÃO DE PACIENTES INTERNADOS NUMA UCI ------------------------");
@@ -61,11 +62,18 @@ public class MenuUI {
                 System.out.println("Selecionou a opção: Ordenar pacientes por data de nascimento.");
                 hospital.ordenarPacientesPorDataNascimento();
             } else if (opcao.equals("5")) {
-                System.out.println("Selecionou a opção: Ordenar técnicos de saúde por nome.");
-                hospital.ordenarTecnicosPorNome();
+                System.out.print("Digite o nome do técnico: ");
+                String nomeTecnico = sc.nextLine();
+                tecnico = hospital.buscarTecnicoPorNome(nomeTecnico);
+                if (tecnico == null) {
+                    System.out.println("Técnico não encontrado.");
+                }
             } else if (opcao.equals("6")) {
+                if (tecnico == null) {
+                    System.out.println("Você precisa selecionar um técnico primeiro (opção 5).");
+                }
                 System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
-                Ficheiros.alterarSinaisVitaisEGuardar(hospital);
+                Ficheiros.alterarSinaisVitais(hospital, tecnico);
             } else if (opcao.equals("7")) {
                 System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
                 Estatisticas estatisticas = new Estatisticas();
@@ -89,9 +97,9 @@ public class MenuUI {
                 Ficheiros.mostrarSinaisVitais(hospital);
             } else if (opcao.equals("11")) {
                 System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
-                Estatisticas.mostrarGraficoBarras();
+                Estatisticas estatisticas = new Estatisticas();
+                estatisticas.mostrarGraficoBarras(hospital);
             }
-
         }
         while (!opcao.equals("0")) ;
     }

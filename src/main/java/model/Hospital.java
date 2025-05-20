@@ -1,4 +1,6 @@
 package model;
+import utils.Data;
+
 
 import utils.Data;
 
@@ -138,14 +140,30 @@ public class Hospital {
             }
         }
     }
+    public static void mostrarSinaisVitais(Hospital hospital) {
+        System.out.println("----- Frequências Cardíacas -----");
+        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
+            System.out.println(f);
+        }
 
+        System.out.println("----- Saturações de Oxigénio -------");
+        for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
+            System.out.println(s);
+        }
+
+        System.out.println("----- Temperaturas -----");
+        for (Temperatura t : hospital.getLstTemperatura()) {
+            System.out.println(t);
+        }
+    }
     public void ordenarPacientesPorDataNascimento() {
         if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes para ordenar.");
             return;
         }
 
-        lstPacientes.sort(Comparator.comparing(Paciente::getDataNascimento));
+        lstPacientes.sort((p1, p2) -> p1.getDataNascimento().compareTo(p2.getDataNascimento()));
+
         System.out.println("Pacientes ordenados por data de nascimento:");
         mostrarPacientes();
     }
@@ -159,6 +177,12 @@ public class Hospital {
         lstTecnicos.sort(Comparator.comparing(TecnicoDeSaude::getNome, String.CASE_INSENSITIVE_ORDER));
         System.out.println("Técnicos de saúde ordenados por nome:");
         mostrarTecnicosSaude();
+    }
+    public TecnicoDeSaude buscarTecnicoPorNome(String nome) {
+        return getLstTecnicos().stream()
+                .filter(t -> t.getNome().equalsIgnoreCase(nome))
+                .findFirst()
+                .orElse(null);
     }
 
 

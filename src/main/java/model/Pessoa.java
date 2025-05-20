@@ -12,7 +12,7 @@ public abstract class Pessoa {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
-        this.dataNascimento = new Data(dataNascimento);
+        this.dataNascimento = new Data(dataNascimento); // agora funciona, pois existe o construtor Data(Data)
     }
 
     public Pessoa(Pessoa p) {

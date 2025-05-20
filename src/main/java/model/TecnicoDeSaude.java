@@ -1,6 +1,6 @@
 package model;
+import utils.Data;
 
-import javax.xml.crypto.Data;
 
 public class TecnicoDeSaude extends Pessoa{
     private String categoriaProfissional;

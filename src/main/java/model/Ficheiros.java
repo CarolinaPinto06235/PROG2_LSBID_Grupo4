@@ -59,6 +59,7 @@ public class Ficheiros {
     public static void carregarTecnicos(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_TECNICOS));
         String linha;
+        int idContador = hospital.getLstTecnicos().size() + 1;  // Gera id simples
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
             String[] campos = linha.split(",");
@@ -69,7 +70,7 @@ public class Ficheiros {
             char sexo = campos[2].trim().charAt(0);
             String categoria = campos[3].trim();
 
-            TecnicoDeSaude t = new TecnicoDeSaude(nome, dataNascimento, sexo, categoria);
+            TecnicoDeSaude t = new TecnicoDeSaude(idContador++, nome, sexo, dataNascimento, categoria);
 
             boolean existe = hospital.getLstTecnicos().stream()
                     .anyMatch(tec -> tec.getNome().equalsIgnoreCase(nome) &&
@@ -81,6 +82,7 @@ public class Ficheiros {
         br.close();
     }
 
+
     public static void carregarSinaisVitais(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_SINAIS_VITAIS));
         String linha;
@@ -88,47 +90,76 @@ public class Ficheiros {
             if (linha.trim().isEmpty()) continue;
 
             String[] campos = linha.split(";");
-            if (campos.length < 5) continue;
+            if (campos.length < 7) continue;
 
             int ID = Integer.parseInt(campos[0].trim());
             String nome = campos[1].trim();
             double frequenciaCardiaca = Double.parseDouble(campos[2].trim());
             double saturacaoOxigenio = Double.parseDouble(campos[3].trim());
             double temperatura = Double.parseDouble(campos[4].trim());
+            Data dataRegisto = new Data(campos[5].trim());
+            String nomeTecnico = campos[6].trim();
 
-            boolean pacienteExiste = hospital.getLstPacientes().stream()
-                    .anyMatch(pac -> pac.getId() == ID);
-
-            if (!pacienteExiste) {
+            Paciente paciente = hospital.getLstPacientes().stream()
+                    .filter(p -> p.getId() == ID)
+                    .findFirst()
+                    .orElse(null);
+            if (paciente == null) {
                 System.out.println("Paciente com ID " + ID + " não encontrado. Ignorando linha.");
                 continue;
             }
 
-            hospital.getLstFreqCard().add(new FrequenciaCardiaca(ID, frequenciaCardiaca));
-            hospital.getLstSaturacao().add(new SaturacaoOxigenio(ID, saturacaoOxigenio));
-            hospital.getLstTemperatura().add(new Temperatura(ID, temperatura));
+            TecnicoDeSaude tecnico = hospital.getLstTecnicos().stream()
+                    .filter(t -> t.getNome().equalsIgnoreCase(nomeTecnico))
+                    .findFirst()
+                    .orElse(null);
+            if (tecnico == null) {
+                System.out.println("Técnico " + nomeTecnico + " não encontrado. Ignorando linha.");
+                continue;
+            }
+
+            hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, frequenciaCardiaca, paciente, tecnico));
+            hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, saturacaoOxigenio, paciente, tecnico));
+            hospital.getLstTemperatura().add(new Temperatura(dataRegisto, temperatura, paciente, tecnico));
         }
         br.close();
     }
-
-    public static void alterarSinaisVitaisEGuardar(Hospital hospital) throws IOException {
+    public static void alterarSinaisVitais(Hospital hospital, TecnicoDeSaude tecnico) {
+        // Exemplo simples para simular alteração dos sinais vitais:
         Scanner sc = new Scanner(System.in);
-        System.out.print("Digite o nome do técnico de saúde que regista os dados: ");
-        String nomeTecnico = sc.nextLine();
 
-        TecnicoDeSaude tecnico = hospital.getLstTecnicos().stream()
-                .filter(t -> t.getNome().equalsIgnoreCase(nomeTecnico))
+        System.out.print("Digite o ID do paciente para alterar sinais vitais: ");
+        int idPaciente = sc.nextInt();
+        sc.nextLine();
+
+        Paciente paciente = hospital.getLstPacientes().stream()
+                .filter(p -> p.getId() == idPaciente)
                 .findFirst()
                 .orElse(null);
 
-        if (tecnico == null) {
-            System.out.println("Técnico não encontrado.");
+        if (paciente == null) {
+            System.out.println("Paciente não encontrado.");
             return;
         }
 
-        hospital.alterarSinaisVitais(tecnico);
-        guardarSinaisVitais(hospital);
+        System.out.print("Nova frequência cardíaca: ");
+        double novaFreq = sc.nextDouble();
+        System.out.print("Nova saturação de oxigênio: ");
+        double novaSaturacao = sc.nextDouble();
+        System.out.print("Nova temperatura: ");
+        double novaTemp = sc.nextDouble();
+        sc.nextLine();
+
+        Data hoje = new Data(); // supondo que o construtor Data() pega a data atual
+
+        hospital.getLstFreqCard().add(new FrequenciaCardiaca(hoje, novaFreq, paciente, tecnico));
+        hospital.getLstSaturacao().add(new SaturacaoOxigenio(hoje, novaSaturacao, paciente, tecnico));
+        hospital.getLstTemperatura().add(new Temperatura(hoje, novaTemp, paciente, tecnico));
+
+        System.out.println("Sinais vitais alterados com sucesso.");
     }
+
+
 
     private static void mostrarPacientes(List<Paciente> pacientes) {
         System.out.println("----- Lista de Pacientes -----");
@@ -146,7 +177,7 @@ public class Ficheiros {
         System.out.println("-------------------------------------");
     }
 
-    private static void mostrarSinaisVitais(Hospital hospital) {
+    public static void mostrarSinaisVitais(Hospital hospital) {
         System.out.println("----- Frequências Cardíacas -----");
         for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
             System.out.println(f);

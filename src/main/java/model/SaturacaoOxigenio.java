@@ -1,5 +1,4 @@
 package model;
-
 import utils.Data;
 
 public class SaturacaoOxigenio extends Medida {
