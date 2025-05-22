@@ -32,11 +32,6 @@ public abstract class Medida {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Medida{");
-        sb.append("dataRegisto=").append(dataRegisto);
-        sb.append(", paciente=").append(paciente);
-        sb.append(", tecnicoDeSaude=").append(tecnicoDeSaude);
-        sb.append('}');
-        return sb.toString();
+        return "Medições: " + dataRegisto.toString() + ", " + paciente.getNome() + ", " + paciente.getId() + ", " + tecnicoDeSaude.getNome() + ", " + tecnicoDeSaude.getId();
     }
 }

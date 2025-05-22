@@ -27,6 +27,16 @@ public class MenuUI {
 
     public void run() throws IOException {
         TecnicoDeSaude tecnico = null;
+
+        try {
+            Ficheiros.carregarPacientes(hospital);
+            Ficheiros.carregarTecnicos(hospital);
+            Ficheiros.carregarSinaisVitais(hospital);
+            System.out.println("Ficheiros carregados com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar ficheiros: " + e.getMessage());
+        }
+
         do {
 
             System.out.println("\n-------------------------  MONOTORIZAÇÃO DE PACIENTES INTERNADOS NUMA UCI ------------------------");

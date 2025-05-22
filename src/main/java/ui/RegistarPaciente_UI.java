@@ -12,7 +12,7 @@ public class RegistarPaciente_UI {
     }
 
     public void run() {
-        System.out.println("Novo Paciente:");
+        System.out.println("Novo Paciente.");
 
         Paciente novoPaciente = introduzDados();
         apresentaDados(novoPaciente);

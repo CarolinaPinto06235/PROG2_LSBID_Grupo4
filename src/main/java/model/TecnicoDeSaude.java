@@ -24,11 +24,7 @@ public class TecnicoDeSaude extends Pessoa{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Técnico de Saúde{");
-        sb.append(super.toString());
-        sb.append("categoriaProfissional=").append(categoriaProfissional);
-        sb.append('}');
-        return sb.toString();
+       return "Técnico de Saúde: " +  getId() + ", " + getNome() + ", " + getSexo() + ", " + getDataNascimento().toString() + ", " + categoriaProfissional;
     }
 
 }

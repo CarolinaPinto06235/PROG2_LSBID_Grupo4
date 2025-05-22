@@ -6,5 +6,5 @@ Técnico de Saúde: 105, Carla Fonseca, 1977-09-21, F, Enfermeira
 Técnico de Saúde: 106, Pedro Carvalho, 1978-06-03, M, Enfermeiro
 Técnico de Saúde: 107, Sofia Almeida, 1992-12-11, F, Médica
 Técnico de Saúde: 108, Carlos Monteiro, 1988-04-17, M, Enfermeiro
-Técnico de Saúde: 109, Helena Ribeiro, 1981-09-05, F, Técnico
+Técnico de Saúde: 109, Helena Ribeiro, 1981-09-05, F, Técnica
 Técnico de Saúde: 110, Mário Lopes, 1972-01-19, M, Médico

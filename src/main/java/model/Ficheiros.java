@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheiros {
-    private static final String FICHEIRO_PACIENTES = "Pacientes.txt";
-    public static final String FICHEIRO_TECNICOS = "TecnicosDeSaude.txt";
-    public static final String FICHEIRO_SINAIS_VITAIS = "Sinais_Vitais.txt";
+    private static final String FICHEIRO_PACIENTES = "resources/Pacientes.txt";
+    public static final String FICHEIRO_TECNICOS = "resources/TecnicosDeSaude.txt";
+    public static final String FICHEIRO_SINAIS_VITAIS = "resources/Sinais_Vitais.txt";
 
     public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -32,32 +32,26 @@ public class Ficheiros {
     }
 
     public static void carregarPacientes(Hospital hospital) throws IOException {
-        InputStream is = Ficheiros.class.getClassLoader().getResourceAsStream(FICHEIRO_PACIENTES);
-        if (is == null) {
-            System.out.println("Arquivo " + FICHEIRO_PACIENTES + " não encontrado no classpath.");
-            return;
-        }
+        BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_PACIENTES));
+        String linha;
+        while ((linha = br.readLine()) != null) {
+            if (linha.trim().isEmpty()) continue;
+            linha = linha.replace("Paciente:", "").trim();
+            String[] campos = linha.split(",");
+            if (campos.length < 5) continue;
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                if (linha.trim().isEmpty()) continue;
-                String[] campos = linha.split(";");
-                if (campos.length < 5) continue;
+            int id = Integer.parseInt(campos[0].trim());
+            String nome = campos[1].trim();
+            char sexo = campos[2].trim().charAt(0);
+            Data dataNascimento = new Data(campos[3].trim());
+            Data dataInternamento = new Data(campos[4].trim());
 
-                int id = Integer.parseInt(campos[0].trim());
-                String nome = campos[1].trim();
-                char sexo = campos[2].trim().charAt(0);
-                Data dataNascimento = new Data(campos[3].trim());
-                Data dataInternamento = new Data(campos[4].trim());
+            Paciente p = new Paciente(id, nome, sexo, dataNascimento, dataInternamento);
 
-                Paciente p = new Paciente(id, nome, sexo, dataNascimento, dataInternamento);
-
-                boolean existe = hospital.getLstPacientes().stream()
-                        .anyMatch(pac -> pac.getId() == id);
-                if (!existe) {
-                    hospital.adicionarPaciente(p);
-                }
+            boolean existe = hospital.getLstPacientes().stream()
+                    .anyMatch(pac -> pac.getId() == id);
+            if (!existe) {
+                hospital.adicionarPaciente(p);
             }
         }
     }
@@ -65,7 +59,7 @@ public class Ficheiros {
     public static void carregarTecnicos(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_TECNICOS));
         String linha;
-        int idContador = hospital.getLstTecnicos().size() + 1;  // Gera id simples
+        int idContador = hospital.getLstTecnicos().size() + 1;
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
             String[] campos = linha.split(",");
@@ -111,7 +105,7 @@ public class Ficheiros {
                     .findFirst()
                     .orElse(null);
             if (paciente == null) {
-                System.out.println("Paciente com ID " + ID + " não encontrado. Ignorando linha.");
+                System.out.println("Paciente com ID " + ID + " não encontrado.");
                 continue;
             }
 
@@ -120,7 +114,7 @@ public class Ficheiros {
                     .findFirst()
                     .orElse(null);
             if (tecnico == null) {
-                System.out.println("Técnico " + nomeTecnico + " não encontrado. Ignorando linha.");
+                System.out.println("Técnico " + nomeTecnico + " não encontrado.");
                 continue;
             }
 
@@ -130,6 +124,7 @@ public class Ficheiros {
         }
         br.close();
     }
+
     public static void alterarSinaisVitais(Hospital hospital, TecnicoDeSaude tecnico) {
         Scanner sc = new Scanner(System.in);
 
@@ -163,7 +158,6 @@ public class Ficheiros {
 
         System.out.println("Sinais vitais alterados com sucesso.");
     }
-
 
 
     private static void mostrarPacientes(List<Paciente> pacientes) {
@@ -202,7 +196,7 @@ public class Ficheiros {
     public static void guardarPacientes(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
-            String linha =  " Paciente: " + p.getId() + ", " + p.getNome() + ", " + p.getSexo() + ", " +
+            String linha = " Paciente: " + p.getId() + ", " + p.getNome() + ", " + p.getSexo() + ", " +
                     p.getDataNascimento().toString() + ", " + p.getDataInternamento().toString();
             bw.write(linha);
             bw.newLine();
