@@ -1,39 +1,39 @@
-Paciente: 1, Vera Magalhães | Valor Temperatura: 36.5 | Data: 2025-04-21 | Técnico de Saúde: 101, João Martins
-Paciente: 1, Vera Magalhães | Valor Frequência: 72.0 | Data: 2025-04-21 | Técnico de Saúde: 102, Ana Costa
-Paciente: 1, Vera Magalhães | Valor Saturação: 98.0 | Data: 2025-04-21 | Técnico de Saúde: 103, Paulo Silva
+1, Vera Magalhães, Temperatura, 36.5, 21/04/2025, 101, João Martins
+1, Vera Magalhães, Frequência, 72.0, 21/04/2025, 102, Ana Costa
+1, Vera Magalhães, Saturação, 98.0, 21/04/2025, 103, Paulo Silva
 
-Paciente: 2, Fernando Lima | Valor Temperatura: 37.1 | Data: 2025-05-01 | Técnico de Saúde: 101, João Martins
-Paciente: 2, Fernando Lima | Valor Frequência: 88.0 | Data: 2025-05-01 | Técnico de Saúde: 102, Ana Costa
-Paciente: 2, Fernando Lima | Valor Saturação: 96.0 | Data: 2025-05-01 | Técnico de Saúde: 103, Paulo Silva
+2, Fernando Lima, Temperatura, 37.1, 01/05/2025, 101, João Martins
+2, Fernando Lima, Frequência, 88.0, 01/05/2025, 102, Ana Costa
+2, Fernando Lima, Saturação, 96.0, 01/05/2025, 103, Paulo Silva
 
-Paciente: 3, Tomás Lopes | Valor Temperatura: 36.7 | Data: 2025-05-12 | Técnico de Saúde: 104, Rita Mendes
-Paciente: 3, Tomás Lopes | Valor Frequência: 75.0 | Data: 2025-05-12 | Técnico de Saúde: 105, Bruno Rocha
-Paciente: 3, Tomás Lopes | Valor Saturação: 97.0 | Data: 2025-05-12 | Técnico de Saúde: 106, Carla Fonseca
+3, Tomás Lopes, Temperatura, 36.7, 12/05/2025, 104, Rita Mendes
+3, Tomás Lopes, Frequência, 75.0, 12/05/2025, 105, Bruno Rocha
+3, Tomás Lopes, Saturação, 97.0, 12/05/2025, 106, Carla Fonseca
 
-Paciente: 4, Marta Azevedo | Valor Temperatura: 37.3 | Data: 2025-05-04 | Técnico de Saúde: 104, Rita Mendes
-Paciente: 4, Marta Azevedo | Valor Frequência: 95.0 | Data: 2025-05-04 | Técnico de Saúde: 105, Bruno Rocha
-Paciente: 4, Marta Azevedo | Valor Saturação: 95.0 | Data: 2025-05-04 | Técnico de Saúde: 106, Carla Fonseca
+4, Marta Azevedo, Temperatura, 37.3, 04/05/2025, 104, Rita Mendes
+4, Marta Azevedo, Frequência, 95.0, 04/05/2025, 105, Bruno Rocha
+4, Marta Azevedo, Saturação, 95.0, 04/05/2025, 106, Carla Fonseca
 
-Paciente: 5, Fátima Ramalhão | Valor Temperatura: 36.2 | Data: 2025-03-15 | Técnico de Saúde: 101, João Martins
-Paciente: 5, Fátima Ramalhão | Valor Frequência: 78.0 | Data: 2025-03-15 | Técnico de Saúde: 102, Ana Costa
-Paciente: 5, Fátima Ramalhão | Valor Saturação: 99.0 | Data: 2025-03-15 | Técnico de Saúde: 103, Paulo Silva
+5, Fátima Ramalhão, Temperatura, 36.2, 15/03/2025, 101, João Martins
+5, Fátima Ramalhão, Frequência, 78.0, 15/03/2025, 102, Ana Costa
+5, Fátima Ramalhão, Saturação, 99.0, 15/03/2025, 103, Paulo Silva
 
-Paciente: 6, Frederico Pinto | Valor Temperatura: 37.0 | Data: 2025-04-23 | Técnico de Saúde: 104, Rita Mendes
-Paciente: 6, Frederico Pinto | Valor Frequência: 100.0 | Data: 2025-04-23 | Técnico de Saúde: 105, Bruno Rocha
-Paciente: 6, Frederico Pinto | Valor Saturação: 94.0 | Data: 2025-04-23 | Técnico de Saúde: 106, Carla Fonseca
+6, Frederico Pinto, Temperatura, 37.0, 23/04/2025, 104, Rita Mendes
+6, Frederico Pinto, Frequência, 100.0, 23/04/2025, 105, Bruno Rocha
+6, Frederico Pinto, Saturação, 94.0, 23/04/2025, 106, Carla Fonseca
 
-Paciente: 7, Diana Fernandes | Valor Temperatura: 36.8 | Data: 2025-01-07 | Técnico de Saúde: 101, João Martins
-Paciente: 7, Diana Fernandes | Valor Frequência: 82.0 | Data: 2025-01-07 | Técnico de Saúde: 102, Ana Costa
-Paciente: 7, Diana Fernandes | Valor Saturação: 97.0 | Data: 2025-01-07 | Técnico de Saúde: 103, Paulo Silva
+7, Diana Fernandes, Temperatura, 36.8, 07/01/2025, 101, João Martins
+7, Diana Fernandes, Frequência, 82.0, 07/01/2025, 102, Ana Costa
+7, Diana Fernandes, Saturação, 97.0, 07/01/2025, 103, Paulo Silva
 
-Paciente: 8, António Moreira | Valor Temperatura: 36.9 | Data: 2025-05-18 | Técnico de Saúde: 104, Rita Mendes
-Paciente: 8, António Moreira | Valor Frequência: 76.0 | Data: 2025-05-18 | Técnico de Saúde: 105, Bruno Rocha
-Paciente: 8, António Moreira | Valor Saturação: 98.0 | Data: 2025-05-18 | Técnico de Saúde: 106, Carla Fonseca
+8, António Moreira, Temperatura, 36.9, 18/05/2025, 104, Rita Mendes
+8, António Moreira, Frequência, 76.0, 18/05/2025, 105, Bruno Rocha
+8, António Moreira, Saturação, 98.0, 18/05/2025, 106, Carla Fonseca
 
-Paciente: 9, Leonor Vilhaça | Valor Temperatura: 37.4 | Data: 2025-05-13 | Técnico de Saúde: 101, João Martins
-Paciente: 9, Leonor Vilhaça | Valor Frequência: 90.0 | Data: 2025-05-13 | Técnico de Saúde: 102, Ana Costa
-Paciente: 9, Leonor Vilhaça | Valor Saturação: 95.0 | Data: 2025-05-13 | Técnico de Saúde: 103, Paulo Silva
+9, Leonor Vilhaça, Temperatura, 37.4, 13/05/2025, 101, João Martins
+9, Leonor Vilhaça, Frequência, 90.0, 13/05/2025, 102, Ana Costa
+9, Leonor Vilhaça, Saturação, 95.0, 13/05/2025, 103, Paulo Silva
 
-Paciente: 10, Bruno Silva | Valor Temperatura: 36.6 | Data: 2025-04-10 | Técnico de Saúde: 104, Rita Mendes
-Paciente: 10, Bruno Silva | Valor Frequência: 80.0 | Data: 2025-04-10 | Técnico de Saúde: 105, Bruno Rocha
-Paciente: 10, Bruno Silva | Valor Saturação: 96.0 | Data: 2025-04-10 | Técnico de Saúde: 106, Carla Fonseca
+10, Bruno Silva, Temperatura, 36.6, 10/04/2025, 104, Rita Mendes
+10, Bruno Silva, Frequência, 80.0, 10/04/2025, 105, Bruno Rocha
+10, Bruno Silva, Saturação, 96.0, 10/04/2025, 106, Carla Fonseca

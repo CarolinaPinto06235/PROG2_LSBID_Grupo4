@@ -59,22 +59,22 @@ public class Ficheiros {
     public static void carregarTecnicos(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_TECNICOS));
         String linha;
-        int idContador = hospital.getLstTecnicos().size() + 1;
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
-            String[] campos = linha.split(",");
-            if (campos.length < 4) continue;
+            linha = linha.replace("Técnico de Saúde:", "").trim();
+            String[] campos = linha.split(", ");
+            if (campos.length < 5) continue;
 
-            String nome = campos[0].trim();
-            Data dataNascimento = new Data(campos[1].trim());
-            char sexo = campos[2].trim().charAt(0);
-            String categoria = campos[3].trim();
+            int id =Integer.parseInt(campos[0].trim());
+            String nome = campos[1].trim();
+            Data dataNascimento = new Data(campos[2].trim());
+            char sexo = campos[3].trim().charAt(0);
+            String categoria = campos[4].trim();
 
-            TecnicoDeSaude t = new TecnicoDeSaude(idContador++, nome, sexo, dataNascimento, categoria);
+            TecnicoDeSaude t = new TecnicoDeSaude(id, nome, sexo, dataNascimento, categoria);
 
             boolean existe = hospital.getLstTecnicos().stream()
-                    .anyMatch(tec -> tec.getNome().equalsIgnoreCase(nome) &&
-                            tec.getDataNascimento().equals(dataNascimento));
+                    .anyMatch(tec -> tec.getNome().equalsIgnoreCase(nome));
             if (!existe) {
                 hospital.getLstTecnicos().add(t);
             }
@@ -89,16 +89,15 @@ public class Ficheiros {
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
 
-            String[] campos = linha.split(";");
-            if (campos.length < 7) continue;
+            String[] campos = linha.split(", ");
+            if (campos.length < 6) continue;
 
             int ID = Integer.parseInt(campos[0].trim());
-            String nome = campos[1].trim();
-            double frequenciaCardiaca = Double.parseDouble(campos[2].trim());
-            double saturacaoOxigenio = Double.parseDouble(campos[3].trim());
-            double temperatura = Double.parseDouble(campos[4].trim());
-            Data dataRegisto = new Data(campos[5].trim());
-            String nomeTecnico = campos[6].trim();
+            String nomePaciente = campos[1].trim();
+            String tipoSinal = campos[2].trim().toLowerCase();
+            double valor = Double.parseDouble(campos[3].trim());
+            Data dataRegisto = new Data(campos[4].trim());
+            String nomeTecnico = campos[5].trim();
 
             Paciente paciente = hospital.getLstPacientes().stream()
                     .filter(p -> p.getId() == ID)
@@ -118,9 +117,20 @@ public class Ficheiros {
                 continue;
             }
 
-            hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, frequenciaCardiaca, paciente, tecnico));
-            hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, saturacaoOxigenio, paciente, tecnico));
-            hospital.getLstTemperatura().add(new Temperatura(dataRegisto, temperatura, paciente, tecnico));
+
+            switch (tipoSinal) {
+                case "temperatura":
+                    hospital.getLstTemperatura().add(new Temperatura(dataRegisto, valor, paciente, tecnico));
+                    break;
+                case "frequencia":
+                    hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, valor, paciente, tecnico));
+                    break;
+                case "saturacao":
+                    hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, valor, paciente, tecnico));
+                    break;
+                default:
+                    System.out.println("Tipo de sinal vital inválido: " + tipoSinal);
+            }
         }
         br.close();
     }
