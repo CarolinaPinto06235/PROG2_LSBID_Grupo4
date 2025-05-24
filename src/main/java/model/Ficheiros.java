@@ -97,7 +97,7 @@ public class Ficheiros {
             String tipoSinal = campos[2].trim().toLowerCase();
             double valor = Double.parseDouble(campos[3].trim());
             Data dataRegisto = new Data(campos[4].trim());
-            String nomeTecnico = campos[5].trim();
+            String idTecnicoStr = campos[5].trim();
 
             Paciente paciente = hospital.getLstPacientes().stream()
                     .filter(p -> p.getId() == ID)
@@ -108,24 +108,25 @@ public class Ficheiros {
                 continue;
             }
 
+            int idTecnico = Integer.parseInt(idTecnicoStr);
             TecnicoDeSaude tecnico = hospital.getLstTecnicos().stream()
-                    .filter(t -> t.getNome().equalsIgnoreCase(nomeTecnico))
+                    .filter(t -> t.getId() == idTecnico)
                     .findFirst()
                     .orElse(null);
             if (tecnico == null) {
-                System.out.println("Técnico " + nomeTecnico + " não encontrado.");
+                System.out.println("Técnico " + idTecnico + " não encontrado.");
                 continue;
             }
 
 
-            switch (tipoSinal) {
+            switch (tipoSinal.toLowerCase()) {
                 case "temperatura":
                     hospital.getLstTemperatura().add(new Temperatura(dataRegisto, valor, paciente, tecnico));
                     break;
-                case "frequencia":
+                case "frequência":
                     hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, valor, paciente, tecnico));
                     break;
-                case "saturacao":
+                case "saturação":
                     hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, valor, paciente, tecnico));
                     break;
                 default:

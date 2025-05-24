@@ -31,11 +31,15 @@ public class Temperatura extends Medida {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Temperatura{");
-        sb.append(super.toString());
-        sb.append("temperatura=").append(temperatura);
-        sb.append('}');
-        return sb.toString();
+        return String.format(
+                "Temperatura:  Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %.1f ºC",
+                this.getDataRegisto(),
+                this.getPaciente().getNome(),
+                this.getPaciente().getId(),
+                this.getTecnicoDeSaude().getNome(),
+                this.getTecnicoDeSaude().getId(),
+                this.getTemperatura()
+        );
     }
 }
 

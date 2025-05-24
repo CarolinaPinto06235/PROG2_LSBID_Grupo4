@@ -29,6 +29,11 @@ public class RegistarPaciente_UI {
 
     private static Paciente introduzDados() {
         int id = Utils.readIntFromConsole("Introduza o ID do paciente: ");
+        if (pacientes.stream().anyMatch(p -> p.getId() == id)) {
+            System.out.println("Já existe um paciente com o ID " + id + ". Por favor, introduza um ID diferente.");
+            return null;
+        }
+
         String nome = Utils.readLineFromConsole("Introduza o nome do paciente: ");
 
         String s;

@@ -31,13 +31,16 @@ public class FrequenciaCardiaca extends Medida {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FrequenciaCardiaca{");
-        sb.append(super.toString());
-        sb.append("frequencia=").append(frequenciaCardiaca);
-        sb.append('}');
-        return sb.toString();
+        return String.format(
+                "Frequência Cardíaca:  Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %d bpm",
+                this.getDataRegisto(),
+                this.getPaciente().getNome(),
+                this.getPaciente().getId(),
+                this.getTecnicoDeSaude().getNome(),
+                this.getTecnicoDeSaude().getId(),
+                this.getFrequenciaCardiaca()
+        );
     }
-
 }
 
 

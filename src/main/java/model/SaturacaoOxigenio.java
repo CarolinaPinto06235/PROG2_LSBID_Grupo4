@@ -30,10 +30,14 @@ public class SaturacaoOxigenio extends Medida {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("SaturacaoOxigenio{");
-        sb.append(super.toString());
-        sb.append("saturacaoOxigenio=").append(saturacaoOxigenio);
-        sb.append('}');
-        return sb.toString();
+        return String.format(
+                "Saturação de Oxigénio: Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %d%%",
+                this.getDataRegisto(),
+                this.getPaciente().getNome(),
+                this.getPaciente().getId(),
+                this.getTecnicoDeSaude().getNome(),
+                this.getTecnicoDeSaude().getId(),
+                this.getSaturacaoOxigenio()
+        );
     }
 }
