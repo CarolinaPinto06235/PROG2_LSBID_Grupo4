@@ -1,10 +1,10 @@
-Técnico de Saúde: 101, Ana Costa, Quinta-feira, 8 de Julho de 1982, F, Enfermeira
-Técnico de Saúde: 102, João Martins, Sexta-feira, 12 de Março de 1965, M, Enfermeiro
-Técnico de Saúde: 103, Rita Mendes, Domingo, 25 de Fevereiro de 1990, F, Técnica
-Técnico de Saúde: 104, Bruno Rocha, Terça-feira, 14 de Maio de 1985, M, Médico
-Técnico de Saúde: 105, Carla Fonseca, Quarta-feira, 21 de Setembro de 1977, F, Enfermeira
-Técnico de Saúde: 106, Pedro Carvalho, Sábado, 3 de Junho de 1978, M, Enfermeiro
-Técnico de Saúde: 107, Sofia Almeida, Sexta-feira, 11 de Dezembro de 1992, F, Médica
-Técnico de Saúde: 108, Carlos Monteiro, Domingo, 17 de Abril de 1988, M, Enfermeiro
-Técnico de Saúde: 109, Helena Ribeiro, Sábado, 5 de Setembro de 1981, F, Técnica
-Técnico de Saúde: 110, Mário Lopes, Quarta-feira, 19 de Janeiro de 1972, M, Médico
+Técnico de Saúde: 101, Ana Costa, 08/07/1982, F, Enfermeira
+Técnico de Saúde: 102, João Martins, 12/03/1965, M, Enfermeiro
+Técnico de Saúde: 103, Rita Mendes, 25/02/1990, F, Técnica
+Técnico de Saúde: 104, Bruno Rocha, 14/05/1985, M, Médico
+Técnico de Saúde: 105, Carla Fonseca, 21/09/1977, F, Enfermeira
+Técnico de Saúde: 106, Pedro Carvalho, 03/06/1978, M, Enfermeiro
+Técnico de Saúde: 107, Sofia Almeida, 11/12/1992, F, Médica
+Técnico de Saúde: 108, Carlos Monteiro, 17/04/1988, M, Enfermeiro
+Técnico de Saúde: 109, Helena Ribeiro, 05/09/1981, F, Técnica
+Técnico de Saúde: 110, Mário Lopes, 19/01/1972, M, Médico

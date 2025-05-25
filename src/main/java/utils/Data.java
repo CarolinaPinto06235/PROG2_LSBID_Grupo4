@@ -44,9 +44,10 @@ public class Data implements Comparable<Data> {
     }
 
     public Data(String data) {
+        data = data.trim();
         String[] partes = data.split("/");
         if (partes.length != 3) {
-            System.out.println("Formato de data inválido. Use DD/MM/AAAA.");
+            System.out.println("Formato de data inválido. Use DD/MM/AAAA. Erro: " + data + ".");
             this.dia = DIA_POR_OMISSAO;
             this.mes = MES_POR_OMISSAO;
             this.ano = ANO_POR_OMISSAO;

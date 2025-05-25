@@ -11,32 +11,32 @@ public class Ficheiros {
     public static final String FICHEIRO_TECNICOS = "resources/TecnicosDeSaude.txt";
     public static final String FICHEIRO_SINAIS_VITAIS = "resources/Sinais_Vitais.txt";
 
-    public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Deseja observar os dados dos (1) Pacientes, dos (2) Técnicos de Saúde ou (3) os Sinais Vitais dos Pacientes?");
-        int escolha = sc.nextInt();
-        sc.nextLine();
-
-        if (escolha == 1) {
-            carregarPacientes(hospital);
-            mostrarPacientes(hospital.getLstPacientes());
-        } else if (escolha == 2) {
-            carregarTecnicos(hospital);
-            mostrarTecnicos(hospital.getLstTecnicos());
-        } else if (escolha == 3) {
-            carregarSinaisVitais(hospital);
-            mostrarSinaisVitais(hospital);
-        } else {
-            System.out.println("Opção inválida.");
-        }
-    }
+//    public static void mostrarDadosDoFicheiro(Hospital hospital) throws IOException {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Deseja observar os dados dos (1) Pacientes, dos (2) Técnicos de Saúde ou (3) os Sinais Vitais dos Pacientes?");
+//        int escolha = sc.nextInt();
+//        sc.nextLine();
+//
+//        if (escolha == 1) {
+//            carregarPacientes(hospital);
+//            mostrarPacientes(hospital.getLstPacientes());
+//        } else if (escolha == 2) {
+//            carregarTecnicos(hospital);
+//            mostrarTecnicos(hospital.getLstTecnicos());
+//        } else if (escolha == 3) {
+//            carregarSinaisVitais(hospital);
+//            mostrarSinaisVitais(hospital);
+//        } else {
+//            System.out.println("Opção inválida.");
+//        }
+//    }
 
     public static void carregarPacientes(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_PACIENTES));
         String linha;
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
-            linha = linha.replace("Paciente:", "").trim();
+            linha = linha.replace("Paciente: ", "").trim();
             String[] campos = linha.split(",");
             if (campos.length < 5) continue;
 
@@ -61,7 +61,7 @@ public class Ficheiros {
         String linha;
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
-            linha = linha.replace("Técnico de Saúde:", "").trim();
+            linha = linha.replace("Técnico de Saúde: ", "").trim();
             String[] campos = linha.split(", ");
             if (campos.length < 5) continue;
 
@@ -193,44 +193,44 @@ public class Ficheiros {
     }
 
 
-    private static void mostrarPacientes(List<Paciente> pacientes) {
-        System.out.println("----- Lista de Pacientes -----");
-        for (Paciente p : pacientes) {
-            System.out.println(p);
-        }
-        System.out.println("------------------------------");
-    }
-
-    private static void mostrarTecnicos(List<TecnicoDeSaude> tecnicos) {
-        System.out.println("----- Lista de Técnicos de Saúde -----");
-        for (TecnicoDeSaude t : tecnicos) {
-            System.out.println(t);
-        }
-        System.out.println("-------------------------------------");
-    }
-
-    public static void mostrarSinaisVitais(Hospital hospital) {
-        System.out.println("----- Frequências Cardíacas -----");
-        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
-            System.out.println(f);
-        }
-
-        System.out.println("----- Saturações de Oxigénio -------");
-        for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
-            System.out.println(s);
-        }
-
-        System.out.println("----- Temperaturas -----");
-        for (Temperatura t : hospital.getLstTemperatura()) {
-            System.out.println(t);
-        }
-    }
+//    private static void mostrarPacientes(List<Paciente> pacientes) {
+//        System.out.println("----- Lista de Pacientes -----");
+//        for (Paciente p : pacientes) {
+//            System.out.println(p);
+//        }
+//        System.out.println("------------------------------");
+//    }
+//
+//    private static void mostrarTecnicos(List<TecnicoDeSaude> tecnicos) {
+//        System.out.println("----- Lista de Técnicos de Saúde -----");
+//        for (TecnicoDeSaude t : tecnicos) {
+//            System.out.println(t);
+//        }
+//        System.out.println("-------------------------------------");
+//    }
+//
+//    public static void mostrarSinaisVitais(Hospital hospital) {
+//        System.out.println("----- Frequências Cardíacas -----");
+//        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
+//            System.out.println(f);
+//        }
+//
+//        System.out.println("----- Saturações de Oxigénio -------");
+//        for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
+//            System.out.println(s);
+//        }
+//
+//        System.out.println("----- Temperaturas -----");
+//        for (Temperatura t : hospital.getLstTemperatura()) {
+//            System.out.println(t);
+//        }
+//    }
 
     public static void guardarPacientes(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
             String linha = " Paciente: " + p.getId() + ", " + p.getNome() + ", " + p.getSexo() + ", " +
-                    p.getDataNascimento().toString() + ", " + p.getDataInternamento().toString();
+                    p.getDataNascimento() + ", " + p.getDataInternamento();
             bw.write(linha);
             bw.newLine();
         }
@@ -240,7 +240,7 @@ public class Ficheiros {
     public static void guardarTecnicos(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_TECNICOS));
         for (TecnicoDeSaude t : hospital.getLstTecnicos()) {
-            String linha = "Técnico de Saúde: " + t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento().toString() + ", " +
+            String linha = "Técnico de Saúde: " + t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento() + ", " +
                     t.getSexo() + ", " + t.getCategoriaProfissional();
             bw.write(linha);
             bw.newLine();

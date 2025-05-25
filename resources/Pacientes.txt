@@ -1,10 +1,11 @@
- Paciente: 1, Vera Magalhães, F, Sábado, 15 de Agosto de 1987, Segunda-feira, 21 de Abril de 2025
- Paciente: 2, Fernando Lima, M, Terça-feira, 27 de Dezembro de 2005, Quinta-feira, 1 de Maio de 2025
- Paciente: 3, Tomás Lopes, M, Segunda-feira, 12 de Setembro de 1977, Segunda-feira, 12 de Maio de 2025
- Paciente: 4, Marta Azevedo, F, Quinta-feira, 24 de Dezembro de 2015, Domingo, 4 de Maio de 2025
- Paciente: 5, Fátima Ramalhão, F, Terça-feira, 4 de Fevereiro de 2025, Sábado, 15 de Março de 2025
- Paciente: 6, Frederico Pinto, M, Quinta-feira, 11 de Junho de 2020, Quarta-feira, 23 de Abril de 2025
- Paciente: 7, Diana Fernandes, F, Quinta-feira, 5 de Outubro de 2000, Terça-feira, 7 de Janeiro de 2025
- Paciente: 8, António Moreira, M, Terça-feira, 11 de Outubro de 1977, Domingo, 18 de Maio de 2025
- Paciente: 9, Leonor Vilhaça, F, Segunda-feira, 17 de Março de 2008, Terça-feira, 13 de Maio de 2025
- Paciente: 10, Bruno Silva, M, Sexta-feira, 7 de Janeiro de 2005, Quinta-feira, 10 de Abril de 2025
+Paciente: 1, Vera Magalhães, F, 15/08/1987, 21/04/2025
+Paciente: 2, Fernando Lima, M, 27/12/2005, 01/05/2025
+Paciente: 3, Tomás Lopes, M, 12/09/1977, 12/05/2025
+Paciente: 4, Marta Azevedo, F, 24/12/2015, 04/05/2025
+Paciente: 5, Fátima Ramalhão, F, 04/02/2025, 15/03/2025
+Paciente: 6, Frederico Pinto, M, 11/06/2020, 23/04/2025
+Paciente: 7, Diana Fernandes, F, 05/10/2000, 07/01/2025
+Paciente: 8, António Moreira, M, 11/10/1977, 18/05/2025
+Paciente: 9, Leonor Vilhaça, F, 17/03/2008, 13/05/2025
+Paciente: 10, Bruno Silva, M, 07/01/2005, 10/04/2025
+
