@@ -1,39 +1,30 @@
-1, Vera Magalhães, Temperatura, 36.5, 21/04/2025, 101, João Martins
-1, Vera Magalhães, Frequência, 72.0, 21/04/2025, 102, Ana Costa
-1, Vera Magalhães, Saturação, 98.0, 21/04/2025, 103, Paulo Silva
-
-2, Fernando Lima, Temperatura, 37.1, 01/05/2025, 101, João Martins
-2, Fernando Lima, Frequência, 88.0, 01/05/2025, 102, Ana Costa
-2, Fernando Lima, Saturação, 96.0, 01/05/2025, 103, Paulo Silva
-
-3, Tomás Lopes, Temperatura, 36.7, 12/05/2025, 104, Rita Mendes
-3, Tomás Lopes, Frequência, 75.0, 12/05/2025, 105, Bruno Rocha
-3, Tomás Lopes, Saturação, 97.0, 12/05/2025, 106, Carla Fonseca
-
-4, Marta Azevedo, Temperatura, 37.3, 04/05/2025, 104, Rita Mendes
-4, Marta Azevedo, Frequência, 95.0, 04/05/2025, 105, Bruno Rocha
-4, Marta Azevedo, Saturação, 95.0, 04/05/2025, 106, Carla Fonseca
-
-5, Fátima Ramalhão, Temperatura, 36.2, 15/03/2025, 101, João Martins
-5, Fátima Ramalhão, Frequência, 78.0, 15/03/2025, 102, Ana Costa
-5, Fátima Ramalhão, Saturação, 99.0, 15/03/2025, 103, Paulo Silva
-
-6, Frederico Pinto, Temperatura, 37.0, 23/04/2025, 104, Rita Mendes
-6, Frederico Pinto, Frequência, 100.0, 23/04/2025, 105, Bruno Rocha
-6, Frederico Pinto, Saturação, 94.0, 23/04/2025, 106, Carla Fonseca
-
-7, Diana Fernandes, Temperatura, 36.8, 07/01/2025, 101, João Martins
-7, Diana Fernandes, Frequência, 82.0, 07/01/2025, 102, Ana Costa
-7, Diana Fernandes, Saturação, 97.0, 07/01/2025, 103, Paulo Silva
-
-8, António Moreira, Temperatura, 36.9, 18/05/2025, 104, Rita Mendes
-8, António Moreira, Frequência, 76.0, 18/05/2025, 105, Bruno Rocha
-8, António Moreira, Saturação, 98.0, 18/05/2025, 106, Carla Fonseca
-
-9, Leonor Vilhaça, Temperatura, 37.4, 13/05/2025, 101, João Martins
-9, Leonor Vilhaça, Frequência, 90.0, 13/05/2025, 102, Ana Costa
-9, Leonor Vilhaça, Saturação, 95.0, 13/05/2025, 103, Paulo Silva
-
-10, Bruno Silva, Temperatura, 36.6, 10/04/2025, 104, Rita Mendes
-10, Bruno Silva, Frequência, 80.0, 10/04/2025, 105, Bruno Rocha
-10, Bruno Silva, Saturação, 96.0, 10/04/2025, 106, Carla Fonseca
+1, Vera Magalhães, temperatura, 36.5, 21/04/2025, 101
+2, Fernando Lima, temperatura, 37.1, 01/05/2025, 101
+3, Tomás Lopes, temperatura, 39.7, 12/05/2025, 104
+4, Marta Azevedo, temperatura, 37.3, 04/05/2025, 104
+5, Fátima Ramalhão, temperatura, 40.0, 15/03/2025, 101
+6, Frederico Pinto, temperatura, 33.0, 23/04/2025, 104
+7, Diana Fernandes, temperatura, 36.8, 07/01/2025, 101
+8, António Moreira, temperatura, 36.9, 18/05/2025, 104
+9, Leonor Vilhaça, temperatura, 33.4, 13/05/2025, 101
+10, Bruno Silva, temperatura, 39.6, 10/04/2025, 104
+1, Vera Magalhães, frequência, 72.0, 21/04/2025, 102
+2, Fernando Lima, frequência, 44.0, 01/05/2025, 102
+3, Tomás Lopes, frequência, 75.0, 12/05/2025, 105
+4, Marta Azevedo, frequência, 95.0, 04/05/2025, 105
+5, Fátima Ramalhão, frequência, 160.0, 15/03/2025, 102
+6, Frederico Pinto, frequência, 100.0, 23/04/2025, 105
+7, Diana Fernandes, frequência, 82.0, 07/01/2025, 102
+8, António Moreira, frequência, 76.0, 18/05/2025, 105
+9, Leonor Vilhaça, frequência, 90.0, 13/05/2025, 102
+10, Bruno Silva, frequência, 50.0, 10/04/2025, 105
+1, Vera Magalhães, saturação, 98.0, 21/04/2025, 103
+2, Fernando Lima, saturação, 80.0, 01/05/2025, 103
+3, Tomás Lopes, saturação, 97.0, 12/05/2025, 106
+4, Marta Azevedo, saturação, 82.0, 04/05/2025, 106
+5, Fátima Ramalhão, saturação, 99.0, 15/03/2025, 103
+6, Frederico Pinto, saturação, 94.0, 23/04/2025, 106
+7, Diana Fernandes, saturação, 97.0, 07/01/2025, 103
+8, António Moreira, saturação, 98.0, 18/05/2025, 106
+9, Leonor Vilhaça, saturação, 95.0, 13/05/2025, 103
+10, Bruno Silva, saturação, 96.0, 10/04/2025, 106

@@ -68,7 +68,7 @@ public class Hospital {
     }
 
 
-    public boolean adicionarSaturacaoOxigenio (Data dataRegisto, double saturacaoOxigenio, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
+    public boolean adicionarSaturacaoOxigenio(Data dataRegisto, double saturacaoOxigenio, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
         SaturacaoOxigenio saturacaoOxigenio1 = new SaturacaoOxigenio(dataRegisto, saturacaoOxigenio, paciente, tecnicoDeSaude);
@@ -76,14 +76,14 @@ public class Hospital {
     }
 
 
-    public boolean adicionarTemperatura (Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
+    public boolean adicionarTemperatura(Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
         Temperatura temperatura1 = new Temperatura(dataRegisto, temperatura, paciente, tecnicoDeSaude);
         return lstTemperatura.add(temperatura1);
     }
 
-    public void visualizarDados(){
+    public void visualizarDados() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
@@ -91,7 +91,8 @@ public class Hospital {
             System.out.println("\n------------ Visualizar dados: ------------");
             System.out.println("-------| 1. Pacientes                |-------");
             System.out.println("-------| 2. Técnicos de Saúde        |-------");
-            System.out.println("-------| 3. Todos                    |-------");
+            System.out.println("-------| 3. Sinais Vitais            |-------");
+            System.out.println("-------| 4. Todos                    |-------");
             System.out.println("-------| 0. Voltar ao menu principal |-------");
             System.out.print("Escolha uma opção: ");
 
@@ -106,8 +107,11 @@ public class Hospital {
                     mostrarTecnicosSaude();
                     break;
                 case 3:
+                    mostrarSinaisVitais();
+                case 4:
                     mostrarPacientes();
                     mostrarTecnicosSaude();
+                    mostrarSinaisVitais();
                     break;
                 case 0:
                     System.out.println("A regressar ao menu principal.");
@@ -140,22 +144,24 @@ public class Hospital {
             }
         }
     }
-    public static void mostrarSinaisVitais(Hospital hospital) {
+
+    public void mostrarSinaisVitais() {
         System.out.println("----- Frequências Cardíacas -----");
-        for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
+        for (FrequenciaCardiaca f : lstFreqCard) {
             System.out.println(f);
         }
 
         System.out.println("----- Saturações de Oxigénio -------");
-        for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
+        for (SaturacaoOxigenio s : lstSaturacao) {
             System.out.println(s);
         }
 
         System.out.println("----- Temperaturas -----");
-        for (Temperatura t : hospital.getLstTemperatura()) {
+        for (Temperatura t : lstTemperatura) {
             System.out.println(t);
         }
     }
+
     public void ordenarPacientesPorDataNascimento() {
         if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes para ordenar.");
@@ -175,17 +181,10 @@ public class Hospital {
         }
 
         lstTecnicos.sort(Comparator.comparing(TecnicoDeSaude::getNome, String.CASE_INSENSITIVE_ORDER));
-        System.out.println("Técnicos de saúde ordenados por nome:");
+        System.out.println("Técnicos de Saúde ordenados por nome:");
         mostrarTecnicosSaude();
     }
-    public TecnicoDeSaude buscarTecnicoPorNome(String nome) {
-        return getLstTecnicos().stream()
-                .filter(t -> t.getNome().equalsIgnoreCase(nome))
-                .findFirst()
-                .orElse(null);
-    }
-
-
+}
 
 /* Alternativa
 
@@ -204,7 +203,6 @@ public class Hospital {
         }
         return false;
     }*/
-}
 
 // Completar com outras funcionalidades
 

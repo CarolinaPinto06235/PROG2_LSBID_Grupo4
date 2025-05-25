@@ -32,7 +32,7 @@ public class FrequenciaCardiaca extends Medida {
     @Override
     public String toString() {
         return String.format(
-                "Frequência Cardíaca:  Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %d bpm",
+                "Frequência Cardíaca:  Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %.2f bpm",
                 this.getDataRegisto(),
                 this.getPaciente().getNome(),
                 this.getPaciente().getId(),

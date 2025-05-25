@@ -72,16 +72,8 @@ public class MenuUI {
                 System.out.println("Selecionou a opção: Ordenar pacientes por data de nascimento.");
                 hospital.ordenarPacientesPorDataNascimento();
             } else if (opcao.equals("5")) {
-                System.out.print("Digite o nome do técnico: ");
-                String nomeTecnico = sc.nextLine();
-                tecnico = hospital.buscarTecnicoPorNome(nomeTecnico);
-                if (tecnico == null) {
-                    System.out.println("Técnico não encontrado.");
-                }
+                hospital.ordenarTecnicosPorNome();
             } else if (opcao.equals("6")) {
-                if (tecnico == null) {
-                    System.out.println("Selecione um técnico primeiro (opção 5).");
-                }
                 System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
                 Ficheiros.alterarSinaisVitais(hospital, tecnico);
             } else if (opcao.equals("7")) {
@@ -97,7 +89,7 @@ public class MenuUI {
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.calcularScoreGravidade(hospital);
             } else if (opcao.equals("10")) {
-                System.out.println("Selecionou a opção: Guardar e visualizar dados do ficheiro.");
+                System.out.println("Selecionou a opção: Guardar dados do ficheiro.");
                 Ficheiros.guardarPacientes(hospital);
                 Ficheiros.guardarTecnicos(hospital);
                 Ficheiros.guardarSinaisVitais(hospital);

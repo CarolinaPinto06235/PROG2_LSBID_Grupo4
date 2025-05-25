@@ -22,8 +22,8 @@ public class Estatisticas implements Calculo {
         scanner.nextLine();
 
         switch (opcao){
-            case 1 -> calcularEstatisticas(hospital);
-            case 2 -> calcularEstatisticasGrupo(hospital);
+            case 1 -> calcularEstatisticasGrupo(hospital);
+            case 2 -> calcularEstatisticas(hospital);
             default -> System.out.println("Opção inválida.");
         }
     }

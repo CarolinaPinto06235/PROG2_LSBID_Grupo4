@@ -31,7 +31,7 @@ public class SaturacaoOxigenio extends Medida {
     @Override
     public String toString() {
         return String.format(
-                "Saturação de Oxigénio: Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %d%%",
+                "Saturação de Oxigénio: Data: %s | Paciente: %s (ID: %d) | Técnico: %s (ID: %d) | Valor: %.1f%%",
                 this.getDataRegisto(),
                 this.getPaciente().getNome(),
                 this.getPaciente().getId(),

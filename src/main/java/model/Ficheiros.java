@@ -89,8 +89,12 @@ public class Ficheiros {
         while ((linha = br.readLine()) != null) {
             if (linha.trim().isEmpty()) continue;
 
-            String[] campos = linha.split(", ");
+            String[] campos = linha.split(",");
             if (campos.length < 6) continue;
+
+            for (int i = 0; i < campos.length; i++) {
+                campos[i] = campos[i].trim();
+            }
 
             int ID = Integer.parseInt(campos[0].trim());
             String nomePaciente = campos[1].trim();
@@ -118,16 +122,34 @@ public class Ficheiros {
                 continue;
             }
 
-
+            boolean jaExiste = false;
             switch (tipoSinal.toLowerCase()) {
                 case "temperatura":
-                    hospital.getLstTemperatura().add(new Temperatura(dataRegisto, valor, paciente, tecnico));
+                    jaExiste = hospital.getLstTemperatura().stream().anyMatch(
+                            t -> t.getPaciente().getId() == ID &&
+                                    t.getDataRegisto().equals(dataRegisto) &&
+                                    t.getTemperatura() == valor &&
+                                    t.getTecnicoDeSaude().getId() == idTecnico);
+                    if (!jaExiste)
+                        hospital.getLstTemperatura().add(new Temperatura(dataRegisto, valor, paciente, tecnico));
                     break;
                 case "frequência":
-                    hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, valor, paciente, tecnico));
+                    jaExiste = hospital.getLstFreqCard().stream().anyMatch(
+                            f -> f.getPaciente().getId() == ID &&
+                                    f.getDataRegisto().equals(dataRegisto) &&
+                                    f.getFrequenciaCardiaca() == valor &&
+                                    f.getTecnicoDeSaude().getId() == idTecnico);
+                    if (!jaExiste)
+                        hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, valor, paciente, tecnico));
                     break;
                 case "saturação":
-                    hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, valor, paciente, tecnico));
+                    jaExiste = hospital.getLstSaturacao().stream().anyMatch(
+                            s -> s.getPaciente().getId() == ID &&
+                                    s.getDataRegisto().equals(dataRegisto) &&
+                                    s.getSaturacaoOxigenio() == valor &&
+                                    s.getTecnicoDeSaude().getId() == idTecnico);
+                    if (!jaExiste)
+                        hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, valor, paciente, tecnico));
                     break;
                 default:
                     System.out.println("Tipo de sinal vital inválido: " + tipoSinal);
@@ -229,29 +251,35 @@ public class Ficheiros {
     public static void guardarSinaisVitais(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_SINAIS_VITAIS));
         for (Temperatura temp : hospital.getLstTemperatura()) {
-            bw.write("Paciente: " + temp.getPaciente().getId() + ", " + temp.getPaciente().getNome()
-                    + " | Valor Temperatura: " + temp.getTemperatura()
-                    + " | Data: " + temp.getDataRegisto()
-                    + " | Técnico de Saúde: " + temp.getTecnicoDeSaude().getId()
-                    + ", " + temp.getTecnicoDeSaude().getNome());
+            String linha = temp.getPaciente().getId() + "," +
+                    temp.getPaciente().getNome() + "," +
+                    "temperatura," +
+                    temp.getTemperatura() + "," +
+                    temp.getDataRegisto() + "," +
+                    temp.getTecnicoDeSaude().getId();
+            bw.write(linha);
             bw.newLine();
         }
 
         for (FrequenciaCardiaca fc : hospital.getLstFreqCard()) {
-            bw.write("Paciente: " + fc.getPaciente().getId() + ", " + fc.getPaciente().getNome()
-                    + " | Valor Frequência: " + fc.getFrequenciaCardiaca()
-                    + " | Data: " + fc.getDataRegisto()
-                    + " | Técnico de Saúde: " + fc.getTecnicoDeSaude().getId()
-                    + ", " + fc.getTecnicoDeSaude().getNome());
+            String linha = fc.getPaciente().getId() + "," +
+                    fc.getPaciente().getNome() + "," +
+                    "frequência," +
+                    fc.getFrequenciaCardiaca() + "," +
+                    fc.getDataRegisto() + "," +
+                    fc.getTecnicoDeSaude().getId();
+            bw.write(linha);
             bw.newLine();
         }
 
         for (SaturacaoOxigenio sat : hospital.getLstSaturacao()) {
-            bw.write("Paciente: " + sat.getPaciente().getId() + ", " + sat.getPaciente().getNome()
-                    + " | Valor Saturação: " + sat.getSaturacaoOxigenio()
-                    + " | Data: " + sat.getDataRegisto()
-                    + " | Técnico de Saúde: " + sat.getTecnicoDeSaude().getId()
-                    + ", " + sat.getTecnicoDeSaude().getNome());
+            String linha = sat.getPaciente().getId() + "," +
+                    sat.getPaciente().getNome() + "," +
+                    "saturação," +
+                    sat.getSaturacaoOxigenio() + "," +
+                    sat.getDataRegisto() + "," +
+                    sat.getTecnicoDeSaude().getId();
+            bw.write(linha);
             bw.newLine();
         }
         bw.close();
