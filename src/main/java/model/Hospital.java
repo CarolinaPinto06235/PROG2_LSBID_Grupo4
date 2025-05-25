@@ -108,6 +108,7 @@ public class Hospital {
                     break;
                 case 3:
                     mostrarSinaisVitais();
+                    break;
                 case 4:
                     mostrarPacientes();
                     mostrarTecnicosSaude();
