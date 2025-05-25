@@ -1,9 +1,5 @@
 package model;
 
-import model.Hospital;
-import model.Paciente;
-import utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -168,19 +164,24 @@ public class Estatisticas implements Calculo {
 
         System.out.println("Lista de pacientes:");
         for (int i = 0; i < lstPacientes.size(); i++) {
-            System.out.println((i + 1) + ". " + lstPacientes.get(i).getNome());
+            Paciente paciente = lstPacientes.get(i);
+            System.out.println("ID: " + paciente.getId() + " - " + paciente.getNome());
         }
 
         System.out.print("Digite o ID do paciente: ");
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
-        if (opcao < 1 || opcao >= lstPacientes.size()) {
-            System.out.println("Opção inválida.");
+        Paciente p = lstPacientes.stream()
+                .filter(paciente -> paciente.getId() == opcao)
+                .findFirst()
+                .orElse(null);
+
+        if (p == null) {
+            System.out.println("Paciente com o ID indicado não foi encontrado.");
             return;
         }
 
-        Paciente p = lstPacientes.get(opcao-1);
         int IDpaciente = p.getId();
 
         Double temp = null;

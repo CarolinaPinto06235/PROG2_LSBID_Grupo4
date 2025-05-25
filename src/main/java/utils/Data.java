@@ -164,4 +164,22 @@ public class Data implements Comparable<Data> {
     public String toAnoMesDiaString() {
         return String.format("%04d/%02d/%02d", ano, mes, dia);
     }
+
+    /**
+     * Formato simples para guardar em ficheiros: dd/MM/yyyy
+     */
+    public String toFileString() {
+        return String.format("%02d/%02d/%04d", dia, mes, ano);
+    }
+
+    /**
+     * Constrói um objeto Data a partir de uma string no formato dd/MM/yyyy
+     */
+    public static Data fromFileString(String data) {
+        String[] partes = data.split("/");
+        int dia = Integer.parseInt(partes[0]);
+        int mes = Integer.parseInt(partes[1]);
+        int ano = Integer.parseInt(partes[2]);
+        return new Data(ano, mes, dia);
+    }
 }

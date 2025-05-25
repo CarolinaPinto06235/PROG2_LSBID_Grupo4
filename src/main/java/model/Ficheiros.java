@@ -1,6 +1,7 @@
 package model;
 
 import utils.Data;
+import utils.Utils;
 
 import java.io.*;
 import java.util.List;
@@ -43,8 +44,8 @@ public class Ficheiros {
             int id = Integer.parseInt(campos[0].trim());
             String nome = campos[1].trim();
             char sexo = campos[2].trim().charAt(0);
-            Data dataNascimento = new Data(campos[3].trim());
-            Data dataInternamento = new Data(campos[4].trim());
+            Data dataNascimento = Data.fromFileString(campos[3].trim());
+            Data dataInternamento = Data.fromFileString(campos[4].trim());
 
             Paciente p = new Paciente(id, nome, sexo, dataNascimento, dataInternamento);
 
@@ -67,7 +68,7 @@ public class Ficheiros {
 
             int id =Integer.parseInt(campos[0].trim());
             String nome = campos[1].trim();
-            Data dataNascimento = new Data(campos[2].trim());
+            Data dataNascimento = Data.fromFileString(campos[2].trim());
             char sexo = campos[3].trim().charAt(0);
             String categoria = campos[4].trim();
 
@@ -100,7 +101,7 @@ public class Ficheiros {
             String nomePaciente = campos[1].trim();
             String tipoSinal = campos[2].trim().toLowerCase();
             double valor = Double.parseDouble(campos[3].trim());
-            Data dataRegisto = new Data(campos[4].trim());
+            Data dataRegisto = Data.fromFileString(campos[4].trim());
             String idTecnicoStr = campos[5].trim();
 
             Paciente paciente = hospital.getLstPacientes().stream()
@@ -175,24 +176,58 @@ public class Ficheiros {
             return;
         }
 
+        Data dataRegisto = new Data(Utils.readLineFromConsole("Nova data de medição (DD/MM/AAAA): "));
+
+
+        // Frequência Cardíaca
+        System.out.println("Selecione o técnico responsável pela frequência cardíaca:");
+        TecnicoDeSaude tecnicoFreq = selecionarTecnico(hospital);
         System.out.print("Nova Frequência Cardíaca: ");
         double novaFreq = sc.nextDouble();
+
+        // Saturação
+        System.out.println("Selecione o técnico responsável pela saturação de oxigénio:");
+        TecnicoDeSaude tecnicoSat = selecionarTecnico(hospital);
         System.out.print("Nova Saturação de Oxigénio: ");
         double novaSaturacao = sc.nextDouble();
+
+        // Temperatura
+        System.out.println("Selecione o técnico responsável pela temperatura:");
+        TecnicoDeSaude tecnicoTemp = selecionarTecnico(hospital);
         System.out.print("Nova Temperatura: ");
         double novaTemp = sc.nextDouble();
         sc.nextLine();
+//        Data dataRegisto = new Data();
 
-        Data hoje = new Data();
-
-        hospital.getLstFreqCard().add(new FrequenciaCardiaca(hoje, novaFreq, paciente, tecnico));
-        hospital.getLstSaturacao().add(new SaturacaoOxigenio(hoje, novaSaturacao, paciente, tecnico));
-        hospital.getLstTemperatura().add(new Temperatura(hoje, novaTemp, paciente, tecnico));
+        hospital.getLstFreqCard().add(new FrequenciaCardiaca(dataRegisto, novaFreq, paciente, tecnicoFreq));
+        hospital.getLstSaturacao().add(new SaturacaoOxigenio(dataRegisto, novaSaturacao, paciente, tecnicoSat));
+        hospital.getLstTemperatura().add(new Temperatura(dataRegisto, novaTemp, paciente, tecnicoTemp));
 
         System.out.println("Sinais vitais alterados com sucesso.");
     }
 
+    private static TecnicoDeSaude selecionarTecnico(Hospital hospital) {
+        Scanner sc = new Scanner(System.in);
 
+        List<TecnicoDeSaude> tecnicos = hospital.getLstTecnicos();
+
+        for (int i = 0; i < tecnicos.size(); i++) {
+            System.out.println((i + 1) + ". " + tecnicos.get(i).getNome());
+        }
+
+        int opcao;
+        while (true) {
+            System.out.print("ID do técnico: ");
+            opcao = sc.nextInt();
+            sc.nextLine();
+            if (opcao >= 1 && opcao <= tecnicos.size()) {
+                break;
+            }
+            System.out.println("Opção inválida. Tente novamente.");
+        }
+
+        return tecnicos.get(opcao - 1);
+    }
 //    private static void mostrarPacientes(List<Paciente> pacientes) {
 //        System.out.println("----- Lista de Pacientes -----");
 //        for (Paciente p : pacientes) {
@@ -230,7 +265,7 @@ public class Ficheiros {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
             String linha = " Paciente: " + p.getId() + ", " + p.getNome() + ", " + p.getSexo() + ", " +
-                    p.getDataNascimento() + ", " + p.getDataInternamento();
+                    p.getDataNascimento().toFileString() + ", " + p.getDataInternamento().toFileString();
             bw.write(linha);
             bw.newLine();
         }
@@ -240,7 +275,7 @@ public class Ficheiros {
     public static void guardarTecnicos(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_TECNICOS));
         for (TecnicoDeSaude t : hospital.getLstTecnicos()) {
-            String linha = "Técnico de Saúde: " + t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento() + ", " +
+            String linha = "Técnico de Saúde: " + t.getId() + ", " + t.getNome() + ", " + t.getDataNascimento().toFileString() + ", " +
                     t.getSexo() + ", " + t.getCategoriaProfissional();
             bw.write(linha);
             bw.newLine();
@@ -255,7 +290,7 @@ public class Ficheiros {
                     temp.getPaciente().getNome() + "," +
                     "temperatura," +
                     temp.getTemperatura() + "," +
-                    temp.getDataRegisto() + "," +
+                    temp.getDataRegisto().toFileString() + "," +
                     temp.getTecnicoDeSaude().getId();
             bw.write(linha);
             bw.newLine();
@@ -266,7 +301,7 @@ public class Ficheiros {
                     fc.getPaciente().getNome() + "," +
                     "frequência," +
                     fc.getFrequenciaCardiaca() + "," +
-                    fc.getDataRegisto() + "," +
+                    fc.getDataRegisto().toFileString() + "," +
                     fc.getTecnicoDeSaude().getId();
             bw.write(linha);
             bw.newLine();
@@ -277,7 +312,7 @@ public class Ficheiros {
                     sat.getPaciente().getNome() + "," +
                     "saturação," +
                     sat.getSaturacaoOxigenio() + "," +
-                    sat.getDataRegisto() + "," +
+                    sat.getDataRegisto().toFileString() + "," +
                     sat.getTecnicoDeSaude().getId();
             bw.write(linha);
             bw.newLine();

@@ -1,6 +1,7 @@
 package ui;
 import model.Hospital;
 import model.Paciente;
+import model.TecnicoDeSaude;
 import utils.Data;
 import utils.Utils;
 
@@ -56,30 +57,50 @@ public class RegistarPaciente_UI {
 
         Data dataRegisto = new Data(Utils.readLineFromConsole("Data da medição (DD/MM/AAAA): "));
 
-        System.out.println("Selecione o técnico responsável:");
+        // Frequência Cardíaca
+        System.out.println("Selecione o técnico responsável pela frequência cardíaca:");
+        mostrarTecnicos();
+        int opcaoFreq = Utils.readIntFromConsole("Número do técnico: ") - 1;
+        if (!validarTecnico(opcaoFreq)) return;
+        TecnicoDeSaude tecnicoFreq = hospital.getLstTecnicos().get(opcaoFreq);
+        double freqCard = Utils.readDoubleFromConsole("Frequência cardíaca (bpm): ");
+        hospital.adicionarFreqCardiaca(dataRegisto, freqCard, paciente, tecnicoFreq);
+
+        // Saturação de Oxigénio
+        System.out.println("Selecione o técnico responsável pela saturação de oxigénio:");
+        mostrarTecnicos();
+        int opcaoSaturacao = Utils.readIntFromConsole("Número do técnico: ") - 1;
+        if (!validarTecnico(opcaoSaturacao)) return;
+        TecnicoDeSaude tecnicoSaturacao = hospital.getLstTecnicos().get(opcaoSaturacao);
+        double saturacao = Utils.readDoubleFromConsole("Saturação de oxigénio (%): ");
+        hospital.adicionarSaturacaoOxigenio(dataRegisto, saturacao, paciente, tecnicoSaturacao);
+
+        // Temperatura
+        System.out.println("Selecione o técnico responsável pela temperatura:");
+        mostrarTecnicos();
+        int opcaoTemp = Utils.readIntFromConsole("Número do técnico: ") - 1;
+        if (!validarTecnico(opcaoTemp)) return;
+        TecnicoDeSaude tecnicoTemp = hospital.getLstTecnicos().get(opcaoTemp);
+        double temperatura = Utils.readDoubleFromConsole("Temperatura (°C): ");
+        hospital.adicionarTemperatura(dataRegisto, temperatura, paciente, tecnicoTemp);
+
+        System.out.println("Medições adicionadas com sucesso.");
+    }
+
+    private void mostrarTecnicos() {
         for (int i = 0; i < hospital.getLstTecnicos().size(); i++) {
             System.out.println((i + 1) + ". " + hospital.getLstTecnicos().get(i).getNome());
         }
-        int opcao = Utils.readIntFromConsole("Número do técnico: ") - 1;
-
-        if (opcao < 0 || opcao >= hospital.getLstTecnicos().size()) {
-            System.out.println("Técnico inválido. Medições não adicionadas.");
-            return;
-        }
-
-        var tecnico = hospital.getLstTecnicos().get(opcao);
-
-        double freqCard = Utils.readDoubleFromConsole("Frequência cardíaca (bpm): ");
-        double saturacao = Utils.readDoubleFromConsole("Saturação de oxigénio (%): ");
-        double temperatura = Utils.readDoubleFromConsole("Temperatura corporal (°C): ");
-
-        hospital.adicionarFreqCardiaca(dataRegisto, freqCard, paciente, tecnico);
-        hospital.adicionarSaturacaoOxigenio(dataRegisto, saturacao, paciente, tecnico);
-        hospital.adicionarTemperatura(dataRegisto, temperatura, paciente, tecnico);
-
-        System.out.println("Medições adicionadas com sucesso.");
-
     }
+    private boolean validarTecnico(int index) {
+        if (index < 0 || index >= hospital.getLstTecnicos().size()) {
+            System.out.println("Técnico inválido. Medições não adicionadas.");
+            return false;
+        }
+        return true;
+    }
+
+
         private void apresentaDados(Paciente paciente) {
         System.out.println("Paciente: " + paciente.toString());
     }
