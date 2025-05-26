@@ -7,11 +7,22 @@ import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe utilitária para operações de leitura e escrita de dados
+ * relacionados a pacientes, técnicos de saúde e sinais vitais.
+ */
 public class Ficheiros {
     private static final String FICHEIRO_PACIENTES = "resources/Pacientes.txt";
     public static final String FICHEIRO_TECNICOS = "resources/TecnicosDeSaude.txt";
     public static final String FICHEIRO_SINAIS_VITAIS = "resources/Sinais_Vitais.txt";
 
+    /**
+     * Carrega os pacientes a partir do ficheiro de texto.
+     * Adiciona apenas pacientes novos ao hospital.
+     *
+     * @param hospital Instância do hospital onde os pacientes serão carregados.
+     * @throws IOException Se ocorrer erro na leitura do ficheiro.
+     */
     public static void carregarPacientes(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_PACIENTES));
         String linha;
@@ -37,6 +48,13 @@ public class Ficheiros {
         }
     }
 
+    /**
+     * Carrega os técnicos de saúde a partir do ficheiro.
+     * Adiciona apenas técnicos ainda não presentes na lista do hospital.
+     *
+     * @param hospital Instância do hospital.
+     * @throws IOException Se ocorrer erro ao ler o ficheiro.
+     */
     public static void carregarTecnicos(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_TECNICOS));
         String linha;
@@ -63,7 +81,13 @@ public class Ficheiros {
         br.close();
     }
 
-
+    /**
+     * Carrega os sinais vitais (temperatura, frequência cardíaca, saturação)
+     * a partir de um ficheiro e associa-os aos pacientes e técnicos.
+     *
+     * @param hospital Instância do hospital.
+     * @throws IOException Se ocorrer erro na leitura do ficheiro.
+     */
     public static void carregarSinaisVitais(Hospital hospital) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FICHEIRO_SINAIS_VITAIS));
         String linha;
@@ -139,6 +163,13 @@ public class Ficheiros {
         br.close();
     }
 
+    /**
+     * Permite a um técnico alterar os sinais vitais de um paciente.
+     * Os novos valores são adicionados às listas correspondentes.
+     *
+     * @param hospital Instância do hospital.
+     * @param tecnico  Técnico de saúde que inicia a alteração (não usado diretamente).
+     */
     public static void alterarSinaisVitais(Hospital hospital, TecnicoDeSaude tecnico) {
         Scanner sc = new Scanner(System.in);
 
@@ -186,6 +217,12 @@ public class Ficheiros {
         System.out.println("Sinais vitais alterados com sucesso.");
     }
 
+    /**
+     * Permite selecionar um técnico de saúde da lista existente.
+     *
+     * @param hospital Instância do hospital.
+     * @return Técnico de saúde selecionado.
+     */
     private static TecnicoDeSaude selecionarTecnico(Hospital hospital) {
         Scanner sc = new Scanner(System.in);
 
@@ -209,6 +246,12 @@ public class Ficheiros {
         return tecnicos.get(opcao - 1);
     }
 
+    /**
+     * Guarda a lista de pacientes no ficheiro.
+     *
+     * @param hospital Instância do hospital.
+     * @throws IOException Se ocorrer erro ao escrever no ficheiro.
+     */
     public static void guardarPacientes(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_PACIENTES));
         for (Paciente p : hospital.getLstPacientes()) {
@@ -220,6 +263,12 @@ public class Ficheiros {
         bw.close();
     }
 
+    /**
+     * Guarda a lista de técnicos de saúde no ficheiro.
+     *
+     * @param hospital Instância do hospital.
+     * @throws IOException Se ocorrer erro ao escrever no ficheiro.
+     */
     public static void guardarTecnicos(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_TECNICOS));
         for (TecnicoDeSaude t : hospital.getLstTecnicos()) {
@@ -231,6 +280,12 @@ public class Ficheiros {
         bw.close();
     }
 
+    /**
+     * Guarda os sinais vitais (temperatura, frequência, saturação) no ficheiro.
+     *
+     * @param hospital Instância do hospital.
+     * @throws IOException Se ocorrer erro ao escrever no ficheiro.
+     */
     public static void guardarSinaisVitais(Hospital hospital) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FICHEIRO_SINAIS_VITAIS));
         for (Temperatura temp : hospital.getLstTemperatura()) {

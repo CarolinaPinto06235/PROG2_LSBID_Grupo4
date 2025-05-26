@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Comparator;
 
+
+/**
+ * Classe que representa um hospital, contendo listas de pacientes, técnicos de saúde
+ * e registos de sinais vitais como frequência cardíaca, saturação de oxigénio e temperatura.
+ */
 public class Hospital {
 
     private String nome;
@@ -14,9 +19,12 @@ public class Hospital {
     private final List<SaturacaoOxigenio> lstSaturacao;
     private final List<Temperatura> lstTemperatura;
     private final List<TecnicoDeSaude> lstTecnicos;
-// Completar
 
-
+    /**
+     * Construtor do hospital.
+     *
+     * @param nome Nome do hospital.
+     */
     public Hospital(String nome) {
         this.nome = nome;
         this.lstPacientes = new ArrayList<>();
@@ -26,27 +34,37 @@ public class Hospital {
         this.lstTecnicos = new ArrayList<>();
     }
 
+    /** @return Lista de pacientes registados no hospital. */
     public List<Paciente> getLstPacientes() {
         return lstPacientes;
     }
 
+    /** @return Lista de pacientes registados no hospital. */
     public List<TecnicoDeSaude> getLstTecnicos() {
         return lstTecnicos;
     }
 
+    /** @return Lista de registos de frequência cardíaca. */
     public List<FrequenciaCardiaca> getLstFreqCard() {
         return lstFreqCard;
     }
 
+    /** @return Lista de registos de saturação de oxigénio. */
     public List<SaturacaoOxigenio> getLstSaturacao() {
         return lstSaturacao;
     }
 
+    /** @return Lista de registos de temperatura. */
     public List<Temperatura> getLstTemperatura() {
         return lstTemperatura;
     }
 
-
+    /**
+     * Adiciona um novo paciente à lista se o ID não estiver já presente.
+     *
+     * @param paciente Paciente a adicionar.
+     * @return true se foi adicionado com sucesso, false se o ID já existe.
+     */
     public boolean adicionarPaciente(Paciente paciente) {
         for (Paciente p : lstPacientes) {
             if (p.getId() == paciente.getId()) {
@@ -57,6 +75,15 @@ public class Hospital {
         return true;
     }
 
+    /**
+     * Adiciona um registo de frequência cardíaca.
+     *
+     * @param dataRegisto Data do registo.
+     * @param frequencia Valor da frequência cardíaca.
+     * @param paciente Paciente a quem o registo pertence.
+     * @param tecnicoDeSaude Técnico responsável.
+     * @return true se foi adicionado com sucesso, false se dados inválidos.
+     */
     public boolean adicionarFreqCardiaca(Data dataRegisto, double frequencia, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
@@ -64,7 +91,15 @@ public class Hospital {
         return lstFreqCard.add(frequenciaCardiaca1);
     }
 
-
+    /**
+     * Adiciona um registo de saturação de oxigénio.
+     *
+     * @param dataRegisto Data do registo.
+     * @param saturacaoOxigenio Valor da saturação de oxigénio.
+     * @param paciente Paciente a quem o registo pertence.
+     * @param tecnicoDeSaude Técnico responsável.
+     * @return true se foi adicionado com sucesso, false se dados inválidos.
+     */
     public boolean adicionarSaturacaoOxigenio(Data dataRegisto, double saturacaoOxigenio, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
@@ -72,7 +107,15 @@ public class Hospital {
         return lstSaturacao.add(saturacaoOxigenio1);
     }
 
-
+    /**
+     * Adiciona um registo de temperatura.
+     *
+     * @param dataRegisto Data do registo.
+     * @param temperatura Valor da temperatura.
+     * @param paciente Paciente a quem o registo pertence.
+     * @param tecnicoDeSaude Técnico responsável.
+     * @return true se foi adicionado com sucesso, false se dados inválidos.
+     */
     public boolean adicionarTemperatura(Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
         if (paciente == null || tecnicoDeSaude == null)
             return false;
@@ -80,6 +123,9 @@ public class Hospital {
         return lstTemperatura.add(temperatura1);
     }
 
+    /**
+     * Menu para visualização de dados do hospital: pacientes, técnicos ou sinais vitais.
+     */
     public void visualizarDados() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -121,6 +167,9 @@ public class Hospital {
         } while (opcao != 0);
     }
 
+    /**
+     * Menu para visualização de dados do hospital: pacientes, técnicos ou sinais vitais.
+     */
     public void mostrarPacientes() {
         if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes registados.");
@@ -132,6 +181,9 @@ public class Hospital {
         }
     }
 
+    /**
+     * Mostra todos os técnicos de saúde registados.
+     */
     public void mostrarTecnicosSaude() {
         if (lstTecnicos.isEmpty()) {
             System.out.println("Não há técnicos de saúde para mostrar.");
@@ -143,6 +195,9 @@ public class Hospital {
         }
     }
 
+    /**
+     * Mostra todos os sinais vitais registados (frequência, saturação e temperatura).
+     */
     public void mostrarSinaisVitais() {
         System.out.println("\n------- Frequências Cardíacas -------\n");
         for (FrequenciaCardiaca f : lstFreqCard) {
@@ -160,6 +215,9 @@ public class Hospital {
         }
     }
 
+    /**
+     * Ordena os pacientes por data de nascimento (mais antigos primeiro).
+     */
     public void ordenarPacientesPorDataNascimento() {
         if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes para ordenar.");
@@ -172,6 +230,9 @@ public class Hospital {
         mostrarPacientes();
     }
 
+    /**
+     * Ordena os técnicos de saúde por nome (ordem alfabética, sem distinguir maiúsculas de minúsculas).
+     */
     public void ordenarTecnicosPorNome() {
         if (lstTecnicos.isEmpty()) {
             System.out.println("Não há técnicos para ordenar.");

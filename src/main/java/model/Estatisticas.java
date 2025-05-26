@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por calcular estatísticas e scores relacionados à saúde dos pacientes.
+ */
 public class Estatisticas implements Calculo {
 
     private Scanner scanner = new Scanner(System.in);
 
-
+    /**
+     * Classe responsável por calcular estatísticas e scores relacionados à saúde dos pacientes.
+     */
     public void mostrarMenu(Hospital hospital) {
         System.out.println("\n------- Estatísticas -------");
         System.out.println("1. Estatísticas de um grupo de pacientes. ");
@@ -24,6 +29,11 @@ public class Estatisticas implements Calculo {
         }
     }
 
+    /**
+     * Calcula e exibe estatísticas de todos os pacientes.
+     *
+     * @param hospital Instância do hospital com os dados.
+     */
     public void calcularEstatisticas(Hospital hospital) {
         double[] freqArray = extrairFrequencias(hospital);
         double[] tempArray = extrairTemperaturas(hospital);
@@ -32,6 +42,11 @@ public class Estatisticas implements Calculo {
         mostrarEstatisticas(freqArray, tempArray, satArray);
     }
 
+    /**
+     * Calcula e exibe estatísticas de um grupo específico de pacientes.
+     *
+     * @param hospital Instância do hospital com os dados.
+     */
     public void calcularEstatisticasGrupo(Hospital hospital) {
         System.out.print("Digite os IDs dos pacientes que deseja selecionar, separados por vírgula: ");
         String linha = scanner.nextLine();
@@ -96,6 +111,13 @@ public class Estatisticas implements Calculo {
         }
     }
 
+    /**
+     * Exibe estatísticas (média, desvio padrão, mínimo e máximo) dos sinais vitais.
+     *
+     * @param freq Array de frequências cardíacas.
+     * @param temp Array de temperaturas.
+     * @param sat  Array de saturações de oxigênio.
+     */
     private void mostrarEstatisticas(double[] freq, double[] temp, double[] sat) {
 
         System.out.println("\n-------Estatísticas dos Sinais Vitais -------\n");
@@ -116,7 +138,12 @@ public class Estatisticas implements Calculo {
                 + ", Máximo: " + calcularMaximo(sat));
     }
 
-
+    /**
+     * Extrai os valores de frequência cardíaca de todos os pacientes.
+     *
+     * @param hospital Instância do hospital.
+     * @return Array de frequências cardíacas.
+     */
     private double[] extrairFrequencias(Hospital hospital) {
         List<Double> lista = new ArrayList<>();
         for (FrequenciaCardiaca f : hospital.getLstFreqCard()) {
@@ -125,6 +152,12 @@ public class Estatisticas implements Calculo {
         return listToArray(lista);
     }
 
+    /**
+     * Extrai os valores de temperatura de todos os pacientes.
+     *
+     * @param hospital Instância do hospital.
+     * @return Array de temperaturas.
+     */
     private double[] extrairTemperaturas(Hospital hospital) {
         List<Double> lista = new ArrayList<>();
         for (Temperatura t : hospital.getLstTemperatura()) {
@@ -133,6 +166,12 @@ public class Estatisticas implements Calculo {
         return listToArray(lista);
     }
 
+    /**
+     * Extrai os valores de saturação de oxigênio de todos os pacientes.
+     *
+     * @param hospital Instância do hospital.
+     * @return Array de saturações de oxigênio.
+     */
     private double[] extrairSaturacoes(Hospital hospital) {
         List<Double> lista = new ArrayList<>();
         for (SaturacaoOxigenio s : hospital.getLstSaturacao()) {
@@ -141,6 +180,12 @@ public class Estatisticas implements Calculo {
         return listToArray(lista);
     }
 
+    /**
+     * Converte uma lista de Double para um array de double.
+     *
+     * @param lista Lista a ser convertida.
+     * @return Array equivalente.
+     */
     private double[] listToArray(List<Double> lista) {
         double[] array = new double[lista.size()];
         for (int i = 0; i < lista.size(); i++) {
@@ -149,7 +194,11 @@ public class Estatisticas implements Calculo {
         return array;
     }
 
-
+    /**
+     * Calcula e exibe o score de gravidade de um paciente com base nos sinais vitais.
+     *
+     * @param hospital Instância do hospital com os dados.
+     */
     public void calcularScoreGravidade(Hospital hospital) {
 
         List<Paciente> lstPacientes = hospital.getLstPacientes();
@@ -231,6 +280,12 @@ public class Estatisticas implements Calculo {
         }
     }
 
+    /**
+     * Retorna a pontuação com base na temperatura corporal.
+     *
+     * @param t Temperatura.
+     * @return Score correspondente.
+     */
     int pontuarTemperatura(double t) {
         if (t < 35.0 || t > 40.0) return 5;
         if (t > 39.0) return 4;
@@ -239,6 +294,12 @@ public class Estatisticas implements Calculo {
         return 2;
     }
 
+    /**
+     * Retorna a pontuação com base na frequência cardíaca.
+     *
+     * @param f Frequência cardíaca.
+     * @return Score correspondente.
+     */
     int pontuarFrequencia(double f) {
         if (f < 40 || f > 140) return 5;
         if ((f >= 121 && f <= 140) || (f >= 40 && f <= 49)) return 4;
@@ -246,6 +307,12 @@ public class Estatisticas implements Calculo {
         return 1;
     }
 
+    /**
+     * Retorna a pontuação com base na saturação de oxigênio.
+     *
+     * @param s Saturação.
+     * @return Score correspondente.
+     */
     int pontuarSaturacao(double s) {
         if (s < 85) return 5;
         if (s < 90) return 4;
@@ -254,6 +321,13 @@ public class Estatisticas implements Calculo {
         return 1;
     }
 
+    /**
+     * Verifica se um paciente é considerado crítico com base em seus sinais vitais.
+     *
+     * @param p        Paciente.
+     * @param hospital Instância do hospital.
+     * @return Verdadeiro se o paciente for crítico.
+     */
     public boolean isCritico(Paciente p, Hospital hospital) {
         double temp = hospital.getLstTemperatura().stream()
                 .filter(t -> t.getIDpaciente() == p.getId())
@@ -273,6 +347,11 @@ public class Estatisticas implements Calculo {
         return (temp < 35 || temp > 38) || (freq < 50 || freq > 120) || (sat < 90);
     }
 
+    /**
+     * Exibe um gráfico de barras textual dos sinais vitais de um paciente.
+     *
+     * @param hospital Instância do hospital com os dados.
+     */
     public void mostrarGraficoBarras(Hospital hospital) {
 
         Scanner scanner = new Scanner(System.in);
@@ -345,6 +424,11 @@ public class Estatisticas implements Calculo {
         System.out.println();
     }
 
+    /**
+     * Desenha uma barra proporcional ao valor informado.
+     *
+     * @param valor Valor para representar com a barra.
+     */
     private void desenharBarra(double valor) {
         int numAsteriscos = (int) (valor / 10);
         for (int i = 0; i < numAsteriscos; i++) {
@@ -353,6 +437,11 @@ public class Estatisticas implements Calculo {
         System.out.println(" (" + valor + ")");
     }
 
+    /**
+     * Calcula e exibe a percentagem de pacientes considerados críticos.
+     *
+     * @param hospital Instância do hospital.
+     */
     public void mostrarPercentagemCriticos(Hospital hospital) {
         List<Paciente> pacientes = hospital.getLstPacientes();
 

@@ -26,6 +26,11 @@ public abstract class Pessoa {
         this.dataNascimento = new Data(dataNascimento);
     }
 
+    /**
+     * Construtor de cópia.
+     *
+     * @param p Objeto do tipo Pessoa a ser copiado.
+     */
     public Pessoa(Pessoa p) {
         this.id = p.id;
         this.nome = p.nome;
@@ -33,22 +38,47 @@ public abstract class Pessoa {
         this.dataNascimento = new Data(p.dataNascimento);
     }
 
+    /**
+     * Devolve o ID da pessoa.
+     *
+     * @return ID numérico.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Devolve o nome da pessoa.
+     *
+     * @return Nome da pessoa.
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Devolve o sexo da pessoa.
+     *
+     * @return 'M' ou 'F'.
+     */
     public char getSexo() {
         return sexo;
     }
 
+    /**
+     * Devolve a data de nascimento da pessoa.
+     *
+     * @return Objeto Data representando a data de nascimento.
+     */
     public Data getDataNascimento() {
         return dataNascimento;
     }
 
+    /**
+     * Representação textual da pessoa.
+     *
+     * @return String com os dados da pessoa.
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Pessoa{");

@@ -8,6 +8,12 @@ package model;
 
 public interface Calculo {
 
+    /**
+     * Calcula a média de um array de valores.
+     *
+     * @param valores Array de valores numéricos.
+     * @return Média dos valores, ou 0 se o array for nulo ou vazio.
+     */
     default double calcularMedia(double[] valores){
         if (valores == null || valores.length == 0) return 0;
 
@@ -18,6 +24,12 @@ public interface Calculo {
         return soma / valores.length;
     }
 
+    /**
+     * Calcula o desvio padrão de um array de valores.
+     *
+     * @param valores Array de valores numéricos.
+     * @return Desvio padrão, ou 0 se o array for nulo ou vazio.
+     */
     default double calcularDesvioPadrao(double[] valores) {
         if (valores == null || valores.length == 0) return 0;
 
@@ -29,6 +41,12 @@ public interface Calculo {
         return Math.sqrt(somaQuadrados / valores.length);
     }
 
+    /**
+     * Retorna o valor mínimo de um array de valores.
+     *
+     * @param valores Array de valores numéricos.
+     * @return Valor mínimo, ou 0 se o array for nulo ou vazio.
+     */
     default double calcularMinimo(double[] valores) {
         if (valores == null || valores.length == 0) return 0;
 
@@ -41,6 +59,12 @@ public interface Calculo {
         return minimo;
     }
 
+    /**
+     * Retorna o valor máximo de um array de valores.
+     *
+     * @param valores Array de valores numéricos.
+     * @return Valor máximo, ou 0 se o array for nulo ou vazio.
+     */
     default double calcularMaximo(double[] valores) {
         if (valores == null || valores.length == 0) return 0;
 
