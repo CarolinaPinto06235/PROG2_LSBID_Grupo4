@@ -2,17 +2,28 @@ package model;
 
 import utils.Data;
 
+/**
+ * Classe abstrata que representa uma pessoa, com propriedades comuns como ID, nome, sexo e data de nascimento.
+ */
 public abstract class Pessoa {
     protected int id;
     protected String nome;
     protected char sexo;
     protected Data dataNascimento;
 
+    /**
+     * Construtor que inicializa os dados de uma pessoa.
+     *
+     * @param id              Identificador único da pessoa.
+     * @param nome            Nome da pessoa.
+     * @param sexo            Sexo da pessoa ('M' ou 'F').
+     * @param dataNascimento  Data de nascimento da pessoa.
+     */
     public Pessoa(int id, String nome, char sexo, Data dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
-        this.dataNascimento = new Data(dataNascimento); // agora funciona, pois existe o construtor Data(Data)
+        this.dataNascimento = new Data(dataNascimento);
     }
 
     public Pessoa(Pessoa p) {
@@ -36,22 +47,6 @@ public abstract class Pessoa {
 
     public Data getDataNascimento() {
         return dataNascimento;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
-    public void setDataNascimento(Data dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     @Override

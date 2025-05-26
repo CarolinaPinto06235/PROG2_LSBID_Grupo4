@@ -8,13 +8,18 @@ import utils.Utils;
 public class RegistarPaciente_UI {
     private Hospital hospital;
 
+    /**
+     * Construtor que associa o registo de paciente a um hospital.
+     * @param hospital Hospital onde serão adicionados os pacientes.
+     */
     public RegistarPaciente_UI(Hospital hospital) {
         this.hospital = hospital;
     }
 
+    /**
+     * Método principal para registar um paciente novo, validar os dados e adicionar medições.
+     */
     public void run() {
-        System.out.println("Novo Paciente.");
-
         Paciente novoPaciente = introduzDados();
         apresentaDados(novoPaciente);
 
@@ -28,6 +33,10 @@ public class RegistarPaciente_UI {
         }
     }
 
+    /**
+     * Lê os dados do paciente a partir da consola e cria um novo objeto Paciente.
+     * @return Paciente criado com os dados introduzidos.
+     */
     private static Paciente introduzDados() {
         int id = Utils.readIntFromConsole("Introduza o ID do paciente: ");
         String nome = Utils.readLineFromConsole("Introduza o nome do paciente: ");
@@ -47,6 +56,10 @@ public class RegistarPaciente_UI {
         return new Paciente(id,nome,sexo,dataNascimento, dataInternamento);
     }
 
+    /**
+     * Permite adicionar medições dos sinais vitais para um paciente, solicitando técnico responsável e valores.
+     * @param paciente Paciente para o qual as medições serão adicionadas.
+     */
     private void adicionarMedicoes(Paciente paciente) {
         if (hospital.getLstTecnicos().isEmpty()) {
             System.out.println("Não existem técnicos registados. Não é possível adicionar medições.");
@@ -87,11 +100,21 @@ public class RegistarPaciente_UI {
         System.out.println("Medições adicionadas com sucesso.");
     }
 
+
+    /**
+     * Exibe a lista dos técnicos de saúde registados no hospital.
+     */
     private void mostrarTecnicos() {
         for (int i = 0; i < hospital.getLstTecnicos().size(); i++) {
             System.out.println((i + 1) + ". " + hospital.getLstTecnicos().get(i).getNome());
         }
     }
+
+    /**
+     * Valida se o índice do técnico selecionado está dentro do intervalo válido.
+     * @param index índice do técnico selecionado.
+     * @return true se válido, false caso contrário.
+     */
     private boolean validarTecnico(int index) {
         if (index < 0 || index >= hospital.getLstTecnicos().size()) {
             System.out.println("Técnico inválido. Medições não adicionadas.");
@@ -100,7 +123,10 @@ public class RegistarPaciente_UI {
         return true;
     }
 
-
+    /**
+     * Apresenta os dados do paciente no ecrã.
+     * @param paciente Paciente cujos dados serão apresentados.
+     */
         private void apresentaDados(Paciente paciente) {
         System.out.println("Paciente: " + paciente.toString());
     }

@@ -17,7 +17,7 @@ public class Estatisticas implements Calculo {
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
-        switch (opcao){
+        switch (opcao) {
             case 1 -> calcularEstatisticasGrupo(hospital);
             case 2 -> calcularEstatisticas(hospital);
             default -> System.out.println("Opção inválida.");
@@ -98,7 +98,7 @@ public class Estatisticas implements Calculo {
 
     private void mostrarEstatisticas(double[] freq, double[] temp, double[] sat) {
 
-        System.out.println("-------Estatísticas dos Sinais Vitais -------");
+        System.out.println("\n-------Estatísticas dos Sinais Vitais -------\n");
 
         System.out.println("Frequência Cardíaca - Média: " + calcularMedia(freq)
                 + ", Desvio Padrão: " + calcularDesvioPadrao(freq)
@@ -231,7 +231,7 @@ public class Estatisticas implements Calculo {
         }
     }
 
-    private int pontuarTemperatura(double t) {
+    int pontuarTemperatura(double t) {
         if (t < 35.0 || t > 40.0) return 5;
         if (t > 39.0) return 4;
         if (t > 38.0) return 3;
@@ -239,14 +239,14 @@ public class Estatisticas implements Calculo {
         return 2;
     }
 
-    private int pontuarFrequencia(double f) {
+    int pontuarFrequencia(double f) {
         if (f < 40 || f > 140) return 5;
         if ((f >= 121 && f <= 140) || (f >= 40 && f <= 49)) return 4;
         if ((f >= 101 && f <= 120) || (f >= 50 && f <= 59)) return 3;
         return 1;
     }
 
-    private int pontuarSaturacao(double s) {
+    int pontuarSaturacao(double s) {
         if (s < 85) return 5;
         if (s < 90) return 4;
         if (s <= 92) return 3;
@@ -294,68 +294,65 @@ public class Estatisticas implements Calculo {
             return;
         }
 
-        System.out.println("\n-------|  Gráfico de Barras  |-------");
+        System.out.println("\n-------  Gráfico de Barras  -------\n");
         System.out.println("Paciente: " + pacienteSelecionado.getNome());
+
+        double freq = -1;
+        double temp = -1;
+        double sat = -1;
+        int id = pacienteSelecionado.getId();
 
         List<FrequenciaCardiaca> listaFreq = hospital.getLstFreqCard();
         List<Temperatura> listaTemp = hospital.getLstTemperatura();
         List<SaturacaoOxigenio> listaSat = hospital.getLstSaturacao();
 
-        for (int i = 0; i < pacientes.size(); i++) {
-            Paciente p = pacientes.get(i);
-            int id = p.getId();
-            String nome = p.getNome();
-
-            double freq = -1;
-            double temp = -1;
-            double sat = -1;
-
-            for (int j = 0; j < listaFreq.size(); j++) {
-                if (listaFreq.get(j).getIDpaciente() == id) {
-                    freq = listaFreq.get(j).getFrequenciaCardiaca();
-                }
+        for (FrequenciaCardiaca f : listaFreq) {
+            if (f.getIDpaciente() == id) {
+                freq = f.getFrequenciaCardiaca();
+                break;
             }
-
-            for (int j = 0; j < listaTemp.size(); j++) {
-                if (listaTemp.get(j).getIDpaciente() == id) {
-                    temp = listaTemp.get(j).getTemperatura();
-                }
-            }
-
-            for (int j = 0; j < listaSat.size(); j++) {
-                if (listaSat.get(j).getIDpaciente() == id) {
-                    sat = listaSat.get(j).getSaturacaoOxigenio();
-                }
-            }
-
-            System.out.println("Paciente: " + nome);
-
-            if (freq != -1) {
-                System.out.print("Frequência Cardíaca: ");
-                desenharBarra(freq);
-            }
-
-            if (temp != -1) {
-                System.out.print("Temperatura: ");
-                desenharBarra(temp);
-            }
-
-            if (sat != -1) {
-                System.out.print("Saturação de Oxigénio: ");
-                desenharBarra(sat);
-            }
-
-            System.out.println();
         }
+
+        for (Temperatura t : listaTemp) {
+            if (t.getIDpaciente() == id) {
+                temp = t.getTemperatura();
+                break;
+            }
+        }
+
+        for (SaturacaoOxigenio s : listaSat) {
+            if (s.getIDpaciente() == id) {
+                sat = s.getSaturacaoOxigenio();
+                break;
+            }
+        }
+
+        if (freq != -1) {
+            System.out.print("Frequência Cardíaca: ");
+            desenharBarra(freq);
+        }
+
+        if (temp != -1) {
+            System.out.print("Temperatura: ");
+            desenharBarra(temp);
+        }
+
+        if (sat != -1) {
+            System.out.print("Saturação de Oxigénio: ");
+            desenharBarra(sat);
+        }
+
+        System.out.println();
     }
 
     private void desenharBarra(double valor) {
-        int numAsteriscos = (int)(valor / 10);
+        int numAsteriscos = (int) (valor / 10);
         for (int i = 0; i < numAsteriscos; i++) {
             System.out.print("*");
         }
         System.out.println(" (" + valor + ")");
     }
+
     public void mostrarPercentagemCriticos(Hospital hospital) {
         List<Paciente> pacientes = hospital.getLstPacientes();
 

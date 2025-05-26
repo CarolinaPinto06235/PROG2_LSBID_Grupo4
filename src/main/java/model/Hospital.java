@@ -1,9 +1,6 @@
 package model;
 import utils.Data;
 
-
-import utils.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -128,7 +125,7 @@ public class Hospital {
         if (lstPacientes.isEmpty()) {
             System.out.println("Não há pacientes registados.");
         } else {
-            System.out.println("------- Lista de Pacientes: -------\n");
+            System.out.println("\n------- Lista de Pacientes: -------\n");
             for (Paciente p : lstPacientes) {
                 System.out.println(p);
             }
@@ -139,7 +136,7 @@ public class Hospital {
         if (lstTecnicos.isEmpty()) {
             System.out.println("Não há técnicos de saúde para mostrar.");
         } else {
-            System.out.println("------- Lista de Técnicos de Saúde: -------\n");
+            System.out.println("\n------- Lista de Técnicos de Saúde: -------\n");
             for (TecnicoDeSaude t : lstTecnicos) {
                 System.out.println(t);
             }
@@ -147,17 +144,17 @@ public class Hospital {
     }
 
     public void mostrarSinaisVitais() {
-        System.out.println("----- Frequências Cardíacas -----");
+        System.out.println("\n------- Frequências Cardíacas -------\n");
         for (FrequenciaCardiaca f : lstFreqCard) {
             System.out.println(f);
         }
 
-        System.out.println("----- Saturações de Oxigénio -------");
+        System.out.println("\n------- Saturações de Oxigénio -------\n");
         for (SaturacaoOxigenio s : lstSaturacao) {
             System.out.println(s);
         }
 
-        System.out.println("----- Temperaturas -----");
+        System.out.println("\n------- Temperaturas -------\n");
         for (Temperatura t : lstTemperatura) {
             System.out.println(t);
         }
@@ -187,24 +184,5 @@ public class Hospital {
     }
 }
 
-/* Alternativa
-
-    public boolean adicionarFreqCardiaca1(Data dataRegisto, double frequencia, int idPaciente, int idTecnicoDeSaude) {
-        //Paciente p = procurarPaciente(idPaciente);
-        //TecnicoPaciente t = procurarTecnico(idTecnico);
-        //....
-        return false;
-    }
-
-    public boolean listaContemPaciente(int id) {
-        for (Paciente paciente : lstPacientes) {
-            if (paciente.getId() == id) {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
-// Completar com outras funcionalidades
 
 

@@ -7,9 +7,7 @@ import model.Ficheiros;
  * and open the template in the editor.
  */
 
-//import model.ViagensTop;
 import model.Estatisticas;
-import model.Ficheiros;
 import model.Hospital;
 import model.TecnicoDeSaude;
 import utils.Utils;
@@ -21,10 +19,18 @@ public class MenuUI {
     private String opcao;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Construtor da classe MenuUI que associa o menu a um hospital.
+     * @param hospital objeto Hospital para manipulação dos dados.
+     */
     public MenuUI(Hospital hospital) {
         this.hospital = hospital;
     }
 
+    /**
+     * Executa o menu principal do sistema, tratando a interação com o utilizador e chamando os métodos apropriados.
+     * @throws IOException caso ocorra erro no carregamento ou gravação dos ficheiros.
+     */
     public void run() throws IOException {
         TecnicoDeSaude tecnico = null;
 
@@ -58,39 +64,39 @@ public class MenuUI {
             opcao = Utils.readLineFromConsole("Escolha uma opção: ");
 
             if (opcao.equals("1")) {
-                System.out.println("Selecionou a opção: Introdução de dados.");
+                System.out.println("\nSelecionou a opção: Introdução de dados.\n");
                 RegistarPaciente_UI ui = new RegistarPaciente_UI(hospital);
                 ui.run();
             } else if (opcao.equals("2")) {
-                System.out.println("Selecionou a opção: Visualização de dados no ecrã.");
+                System.out.println("\nSelecionou a opção: Visualização de dados no ecrã.\n");
                 hospital.visualizarDados();
             } else if (opcao.equals("3")) {
-                System.out.println("Selecionou a opção: Ordenar pacientes por data de nascimento.");
+                System.out.println("\nSelecionou a opção: Ordenar pacientes por data de nascimento.\n");
                 hospital.ordenarPacientesPorDataNascimento();
             } else if (opcao.equals("4")) {
-                System.out.println("Selecionou a opção: Ordenar técnicos de saúde por nome (A-Z).");
+                System.out.println("\nSelecionou a opção: Ordenar técnicos de saúde por nome (A-Z).\n");
                 hospital.ordenarTecnicosPorNome();
             } else if (opcao.equals("5")) {
-                System.out.println("Selecionou a opção: Alteração dos sinais vitais.");
+                System.out.println("\nSelecionou a opção: Alteração dos sinais vitais.\n");
                 Ficheiros.alterarSinaisVitais(hospital, tecnico);
             } else if (opcao.equals("6")) {
-                System.out.println("Selecionou a opção: Percentagem de pacientes em situação crítica.");
+                System.out.println("\nSelecionou a opção: Percentagem de pacientes em situação crítica.\n");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.mostrarPercentagemCriticos(hospital);
             } else if (opcao.equals("7")) {
-                System.out.println("Selecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).");
+                System.out.println("\nSelecionou a opção: Estatísticas dos pacientes (um paciente, um grupo de pacientes ou de todos os pacientes).\n");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.mostrarMenu(hospital);
             } else if (opcao.equals("8")) {
-                System.out.println("Selecionou a opção: Determinação do score de gravidade de um paciente.");
+                System.out.println("\nSelecionou a opção: Determinação do score de gravidade de um paciente.\n");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.calcularScoreGravidade(hospital);
             } else if (opcao.equals("9")) {
-                System.out.println("Selecionou a opção: Visualização de gráficos de barras.");
+                System.out.println("\nSelecionou a opção: Visualização de gráficos de barras.\n");
                 Estatisticas estatisticas = new Estatisticas();
                 estatisticas.mostrarGraficoBarras(hospital);
             } else if (opcao.equals("10")) {
-                System.out.println("Selecionou a opção: Guardar dados do ficheiro.");
+                System.out.println("\nSelecionou a opção: Guardar dados do ficheiro.\n");
                 Ficheiros.guardarPacientes(hospital);
                 Ficheiros.guardarTecnicos(hospital);
                 Ficheiros.guardarSinaisVitais(hospital);
