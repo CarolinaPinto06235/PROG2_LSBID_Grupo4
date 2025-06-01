@@ -25,7 +25,7 @@ public class Utils {
     }
 
     /**
-     * Lê um número inteiro do console com repetição em caso de erro.
+     * Lê um número inteiro da consola com repetição em caso de erro.
      *
      * @param strPrompt Texto a mostrar antes de ler o inteiro.
      * @return O número inteiro lido do console.
