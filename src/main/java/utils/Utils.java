@@ -46,7 +46,7 @@ public class Utils {
      * Lê um número decimal (double) do console com repetição em caso de erro.
      *
      * @param strPrompt Texto a mostrar antes de ler o double
-     * @return O número double lido do console.
+     * @return O número double lido da consola.
      */
     public static double readDoubleFromConsole(String strPrompt) {
         do {
