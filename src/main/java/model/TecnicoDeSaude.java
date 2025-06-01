@@ -33,7 +33,7 @@ public class TecnicoDeSaude extends Pessoa{
     }
 
     /**
-     * Devolve a categoria profissional do técnico.
+     * Devolve a categoria profissional do técnico
      *
      * @return Categoria profissional.
      */
