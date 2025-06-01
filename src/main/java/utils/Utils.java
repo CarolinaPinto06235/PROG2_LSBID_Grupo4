@@ -7,7 +7,7 @@ import java.util.List;
 public class Utils {
 
     /**
-     * Lê uma linha do console após mostrar um prompt.
+     * Lê uma linha da consola após mostrar um prompt.
      *
      * @param strPrompt Texto a mostrar antes de ler a linha.
      * @return A linha lida do console como String, ou null se houver erro.
