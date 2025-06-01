@@ -4,7 +4,7 @@ import model.Hospital;
 
 /**
  * Classe principal do programa.
- * Responsável por executar o sistema de gestão de pacientes e técnicos de saúde numa UCI,
+ * Responsável por executar o sistema de gestão de pacientes e técnicos de saúde numa UCI;
  * incluindo registo de dados, estatísticas e manipulação de ficheiros.
  */
 

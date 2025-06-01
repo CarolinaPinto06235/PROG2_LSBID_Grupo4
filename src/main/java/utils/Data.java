@@ -1,7 +1,7 @@
 package utils;
 
 /**
- * Classe que representa uma data (ano, mês, dia).
+ * Classe que representa uma data (ano, mês, dia)
  * Permite operações como comparação, cálculo de diferença, e formatação.
  *
  * @author mdm

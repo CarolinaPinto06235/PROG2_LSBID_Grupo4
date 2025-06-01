@@ -23,7 +23,7 @@ public class TecnicoDeSaude extends Pessoa{
     }
 
     /**
-     * Construtor de cópia que cria uma nova instância baseada em outro TécnicoDeSaude.
+     * Construtor de cópia que cria uma nova instância baseada em outro TécnicoDeSaude
      *
      * @param ts TécnicoDeSaude a copiar.
      */
@@ -44,7 +44,7 @@ public class TecnicoDeSaude extends Pessoa{
     /**
      * Representação textual do Técnico de Saúde.
      *
-     * @return String com os dados principais do técnico.
+     * @return String com os dados principais do técnico
      */
     @Override
     public String toString() {

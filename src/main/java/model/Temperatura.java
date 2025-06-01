@@ -12,7 +12,7 @@ public class Temperatura extends Medida {
      *
      * @param dataRegisto Data em que a medição foi registada.
      * @param temperatura Valor da temperatura registada (deve estar entre 33.0 e 40.0).
-     * @param paciente Paciente a quem pertence a medição.
+     * @param paciente Paciente a quem pertence a medição
      * @param tecnicoDeSaude Técnico responsável pela medição.
      */
     public Temperatura(Data dataRegisto, double temperatura, Paciente paciente, TecnicoDeSaude tecnicoDeSaude) {
@@ -28,7 +28,7 @@ public class Temperatura extends Medida {
     /**
      * Devolve o valor da temperatura registada.
      *
-     * @return Temperatura em graus Celsius.
+     * @return Temperatura em graus Celsius
      */
     public double getTemperatura() {
         return temperatura;

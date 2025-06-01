@@ -10,7 +10,7 @@ public class RegistarPaciente_UI {
 
     /**
      * Construtor que associa o registo de paciente a um hospital.
-     * @param hospital Hospital onde serão adicionados os pacientes.
+     * @param hospital Hospital onde serão adicionados os pacientes
      */
     public RegistarPaciente_UI(Hospital hospital) {
         this.hospital = hospital;
@@ -35,7 +35,7 @@ public class RegistarPaciente_UI {
 
     /**
      * Lê os dados do paciente a partir da consola e cria um novo objeto Paciente.
-     * @return Paciente criado com os dados introduzidos.
+     * @return Paciente criado com os dados introduzidos
      */
     private static Paciente introduzDados() {
         int id = Utils.readIntFromConsole("Introduza o ID do paciente: ");
@@ -58,7 +58,7 @@ public class RegistarPaciente_UI {
 
     /**
      * Permite adicionar medições dos sinais vitais para um paciente, solicitando técnico responsável e valores.
-     * @param paciente Paciente para o qual as medições serão adicionadas.
+     * @param paciente Paciente para o qual as medições serão adicionadas
      */
     private void adicionarMedicoes(Paciente paciente) {
         if (hospital.getLstTecnicos().isEmpty()) {

@@ -29,7 +29,7 @@ public class MenuUI {
 
     /**
      * Executa o menu principal do sistema, tratando a interação com o utilizador e chamando os métodos apropriados.
-     * @throws IOException caso ocorra erro no carregamento ou gravação dos ficheiros.
+     * @throws IOException caso ocorra erro no carregamento ou gravação dos ficheiros
      */
     public void run() throws IOException {
         TecnicoDeSaude tecnico = null;
@@ -45,7 +45,7 @@ public class MenuUI {
 
         do {
 
-            System.out.println("\n-------------------------  MONOTORIZAÇÃO DE PACIENTES INTERNADOS NUMA UCI ------------------------");
+            System.out.println("\n-------------------------  MONOTORIZAÇÃO DOS PACIENTES INTERNADOS NUMA UCI ------------------------");
             System.out.println("--------------------------------------------------------------------------------------------------\n");
             System.out.println("\n--------------------------------------    MENU PRINCIPAL    --------------------------------------");
             System.out.println("----------------- |  1 - Introdução de dados.                                 |  -----------------");
