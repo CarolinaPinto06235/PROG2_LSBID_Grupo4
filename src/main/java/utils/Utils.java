@@ -10,7 +10,7 @@ public class Utils {
      * Lê uma linha da consola após mostrar um prompt.
      *
      * @param strPrompt Texto a mostrar antes de ler a linha.
-     * @return A linha lida do console como String, ou null se houver erro.
+     * @return A linha lida da consola como String, ou null se houver erro.
      */
     static public String readLineFromConsole(String strPrompt) {
         try {
@@ -28,7 +28,7 @@ public class Utils {
      * Lê um número inteiro da consola com repetição em caso de erro.
      *
      * @param strPrompt Texto a mostrar antes de ler o inteiro.
-     * @return O número inteiro lido do console.
+     * @return O número inteiro lido da consola.
      */
     public static int readIntFromConsole(String strPrompt) {
         do {
@@ -43,7 +43,7 @@ public class Utils {
     }
 
     /**
-     * Lê um número decimal (double) do console com repetição em caso de erro.
+     * Lê um número decimal (double) da consola com repetição em caso de erro.
      *
      * @param strPrompt Texto a mostrar antes de ler o double
      * @return O número double lido da consola.

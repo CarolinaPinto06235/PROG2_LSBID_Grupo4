@@ -116,7 +116,7 @@ public class Estatisticas implements Calculo {
      *
      * @param freq Array de frequências cardíacas.
      * @param temp Array de temperaturas.
-     * @param sat  Array de saturações de oxigênio.
+     * @param sat  Array de saturações de oxigénio.
      */
     private void mostrarEstatisticas(double[] freq, double[] temp, double[] sat) {
 
@@ -167,10 +167,10 @@ public class Estatisticas implements Calculo {
     }
 
     /**
-     * Extrai os valores de saturação de oxigênio de todos os pacientes.
+     * Extrai os valores de saturação de oxigénio de todos os pacientes.
      *
      * @param hospital Instância do hospital.
-     * @return Array de saturações de oxigênio.
+     * @return Array de saturações de oxigénio.
      */
     private double[] extrairSaturacoes(Hospital hospital) {
         List<Double> lista = new ArrayList<>();
@@ -308,7 +308,7 @@ public class Estatisticas implements Calculo {
     }
 
     /**
-     * Retorna a pontuação com base na saturação de oxigênio.
+     * Retorna a pontuação com base na saturação de oxigénio.
      *
      * @param s Saturação.
      * @return Score correspondente.
@@ -322,7 +322,7 @@ public class Estatisticas implements Calculo {
     }
 
     /**
-     * Verifica se um paciente é considerado crítico com base em seus sinais vitais.
+     * Verifica se um paciente é considerado crítico com base nos seus sinais vitais.
      *
      * @param p        Paciente.
      * @param hospital Instância do hospital.
